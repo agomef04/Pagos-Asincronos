@@ -1,5 +1,6 @@
 package com.WebSocket.service;
 
+import com.WebSocket.model.BankAccount;
 import com.WebSocket.model.User;
 import com.WebSocket.model.documentElastic.UserElastic;
 import com.WebSocket.repository.ElasticsearchUserRepository;
@@ -37,6 +38,13 @@ public class UserService {
         }
 
         return savedUser;
+    }
+    public User loginUser(String email, String password) {
+        User existUser = userRepository.findByEmailAndPassword(email,password);
+        if(existUser == null) {
+            // excepcion nde no existe
+        }
+        return existUser;
     }
 
     public User save(User user) {

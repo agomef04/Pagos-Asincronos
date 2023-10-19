@@ -26,7 +26,18 @@ public class UserController {
         }
 
         User createdUser = userService.createUser(user);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        return new ResponseEntity<>(createdUser, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String password) {
+        System.out.println("Email ->" + email + ", Password -> " + password);
+        User userLogin = userService.loginUser(email,password);
+        if(userLogin == null) {
+            return ResponseEntity.badRequest().body("El usuario no existe");
+        }
+
+        return new ResponseEntity<>(userLogin, HttpStatus.CREATED);
     }
 
 
