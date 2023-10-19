@@ -10,12 +10,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {Component} from '@angular/core';
+import { RegisterPageComponent } from './register-page/register-page.component';
+import { BloqueadorDirective } from './register-page/bloqueador.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterPageComponent,
+    BloqueadorDirective
   ],
   imports: [
     BrowserModule,
