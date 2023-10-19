@@ -1,7 +1,7 @@
 # Pagos-Asincronos
 ![Esquema aplicacion](Esquema.png)
 
-![Esquema BD](BDPagosAsincronos.png)
+![Esquema BD](BDPagosAsincronos.jpg)
 
 Version Java 11
 

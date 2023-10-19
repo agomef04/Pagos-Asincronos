@@ -1,7 +1,17 @@
 package com.WebSocket.model;
 
-public class User {
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+
+@Entity
+public class User implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String email;
     private String password;
@@ -14,6 +24,13 @@ public class User {
 
     public User(int idUser, String email, String password, String name, String phoneNumber) {
         this.id = idUser;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public User(String email, String password, String name, String phoneNumber) {
         this.email = email;
         this.password = password;
         this.name = name;

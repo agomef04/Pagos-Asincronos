@@ -1,7 +1,16 @@
 package com.WebSocket.model;
 
-public class BankAccount {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 
+@Entity
+public class BankAccount implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private double Amount;
     private User user;
@@ -12,6 +21,11 @@ public class BankAccount {
 
     public BankAccount(int id, double amount, User user) {
         this.id = id;
+        Amount = amount;
+        this.user = user;
+    }
+
+    public BankAccount(double amount, User user) {
         Amount = amount;
         this.user = user;
     }

@@ -1,23 +1,42 @@
 package com.WebSocket.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Transfer {
+@Entity
+public class Transfer implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private double amount;
-    private String concept;
+    private State state;
+    String concept;
     private Date date;
-    private String state;
+    @Lob // Anotación para indicar un campo Large Object (LOB)
+    @Column(columnDefinition = "MEDIUMBLOB")
     private BankAccount accountOrigin;
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
     private BankAccount accountDestination;
 
     public Transfer() {
 
     }
 
-    public Transfer(int id, double amount, String concept, Date date, String state, BankAccount accountOrigin, BankAccount accountDestination) {
+    public Transfer(int id, double amount, String concept, Date date, State state, BankAccount accountOrigin, BankAccount accountDestination) {
         this.id = id;
+        this.amount = amount;
+        this.concept = concept;
+        this.date = date;
+        this.state = state;
+        this.accountOrigin = accountOrigin;
+        this.accountDestination = accountDestination;
+    }
+
+    public Transfer(double amount, String concept, Date date, State state, BankAccount accountOrigin, BankAccount accountDestination) {
+
         this.amount = amount;
         this.concept = concept;
         this.date = date;
@@ -58,11 +77,11 @@ public class Transfer {
         this.date = date;
     }
 
-    public String getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(State state) {
         this.state = state;
     }
 
