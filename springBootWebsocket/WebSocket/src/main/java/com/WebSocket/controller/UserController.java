@@ -5,33 +5,28 @@ import com.WebSocket.model.User;
 import com.WebSocket.repository.UserRepository;
 import com.WebSocket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
-import java.util.List;
-
-
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    private final UserRepository userRepository;
-
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        // Lógica para crear el usuario y guardar en la base de datos
-        System.out.println("usuario postman -> " + user.getEmail());
-        User savedUser = userRepository.save(user);
-        return ResponseEntity.ok(savedUser);
+    public ResponseEntity<?> createUser(@RequestBody User user) {
+        // comprobar si existe usuario
+        if(userService.userExists(user)) {
+            return ResponseEntity.badRequest().body("El usuario ya existe");
+        }
+
+        User createdUser = userService.createUser(user);
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
 

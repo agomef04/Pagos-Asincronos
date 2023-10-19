@@ -1,41 +1,52 @@
-package com.WebSocket.model;
+package com.WebSocket.model.documentElastic;
 
 
+
+import com.WebSocket.model.User;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 
-@Entity
 @Document(indexName = "user")
-public class User implements Serializable {
+public class UserElastic implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String email;
     private String password;
     private String name;
     private String phoneNumber;
 
-    public User() {
+    private Date date;
+
+    public UserElastic() {
 
     }
 
-    public User(int idUser, String email, String password, String name, String phoneNumber) {
+    public UserElastic(int idUser, String email, String password, String name, String phoneNumber) {
         this.id = idUser;
         this.email = email;
         this.password = password;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.date = new Date();
     }
 
-    public User(String email, String password, String name, String phoneNumber) {
+    public UserElastic(String email, String password, String name, String phoneNumber) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.date = new Date();
+    }
+
+    public UserElastic(User user) {
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.name = user.getName();
+        this.phoneNumber = user.getPhoneNumber();
+        this.date = new Date();
     }
 
     public int getId() {
@@ -78,3 +89,4 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 }
+

@@ -2,6 +2,7 @@ package com.WebSocket;
 
 import com.WebSocket.model.*;
 import com.WebSocket.repository.*;
+import com.WebSocket.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -15,17 +16,17 @@ public class WebSocketApplication {
 
 		ConfigurableApplicationContext context = SpringApplication.run(WebSocketApplication.class);
 
-		UserRepository repositoryUser = context.getBean(UserRepository.class);
-		BankAccountRepository repositoryBankAccount = context.getBean(BankAccountRepository.class);
-		StateRepository repositoryState = context.getBean(StateRepository.class);
-		TransferRepository repositoryTransfer = context.getBean(TransferRepository.class);
+		/**
+		 UserRepository repositoryUser = context.getBean(UserRepository.class);
+		 BankAccountRepository repositoryBankAccount = context.getBean(BankAccountRepository.class);
+		 StateRepository repositoryState = context.getBean(StateRepository.class);
+		 TransferRepository repositoryTransfer = context.getBean(TransferRepository.class);
 
-		// Eliminar todos los registros
-		repositoryTransfer.deleteAll();
-		repositoryBankAccount.deleteAll();
-		repositoryState.deleteAll();
-		repositoryUser.deleteAll();
-
+		 // Eliminar todos los registros
+		 repositoryTransfer.deleteAll();
+		 repositoryBankAccount.deleteAll();
+		 repositoryState.deleteAll();
+		 repositoryUser.deleteAll();
 
 		// Guardar usuarios
 		User user = new User("juan@gmail.com","password","juanito","987654321");
@@ -46,8 +47,9 @@ public class WebSocketApplication {
 			System.out.println("\t" + u);
 		}
 		System.out.println();
+		**/
 
-		context.close();
+		//context.close();
 
 
 	}
