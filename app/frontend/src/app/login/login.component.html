@@ -1,22 +1,23 @@
-<div >
-    <div class="main">
-      <h1>Iniciar Sesión</h1>
+<div id="principal">
+  <div class="main">
+    <h1>Iniciar Sesión</h1>
     <mat-card-content class="full-width">
-      <form class="login-form">
+      <form class="login-form" (submit)="login()">
         <mat-form-field class="full-width">
-          <input matInput placeholder="Correo electrónico" type="email">
+          <input [(ngModel)]="email" matInput placeholder="Correo electrónico" type="email" name="email">
         </mat-form-field>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Contraseña" type="password">
+          <input [(ngModel)]="password" matInput placeholder="Contraseña" type="password" name="password">
         </mat-form-field>
-        <button mat-raised-button color="primary" class="login-button">Iniciar Sesión</button>
+        <button mat-raised-button color="primary" class="login-button" type="submit">Iniciar Sesión</button>
       </form>
     </mat-card-content>
 
     <div class="register">
-        ¿No tienes cuenta? Regístrate <a href="http://pendiente.com"> aquí</a> (Falta por enrutarlo)
+      ¿No tienes cuenta? Regístrate <a href="http://google.com"> aquí</a>
     </div>
-
-    </div>
+  </div>
 </div>
-  
+
+
+
