@@ -12,12 +12,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {Component} from '@angular/core';
+import { TransactionViewComponent } from './transaction-view/transaction-view.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    TransactionViewComponent
   ],
   imports: [
     BrowserModule,

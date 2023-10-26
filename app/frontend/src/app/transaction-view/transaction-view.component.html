@@ -1,0 +1,37 @@
+<table mat-table [dataSource]="transactions" matSort class="mat-elevation-z8" color="primary">
+  <!-- Columnas -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="importe">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Importe</th>
+    <td mat-cell *matCellDef="let element">{{ element.importe }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="numOrigen">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero Origen</th>
+    <td mat-cell *matCellDef="let element">{{ element.numeroOrigen }}</td>
+  </ng-container>
+  
+  <ng-container matColumnDef="numDestino">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero Destino</th>
+    <td mat-cell *matCellDef="let element">{{ element.numeroDestino }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+    <td mat-cell *matCellDef="let element">{{ element.fecha }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="concepto">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Concepto</th>
+    <td mat-cell *matCellDef="let element">{{ element.concepto }}</td>
+  </ng-container>
+  <!-- Otras columnas -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
