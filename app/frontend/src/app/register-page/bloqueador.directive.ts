@@ -8,7 +8,7 @@ export class BloqueadorDirective{
     constructor(){}
 
     @HostListener("paste", ["$event"]) blockPaste(e: KeyboardEvent){
-        //alert("aaa");
+        alert("No se puede usar esta acción");
         e.preventDefault();
     }
 
