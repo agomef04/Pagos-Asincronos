@@ -12,6 +12,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {Component} from '@angular/core';
+import { RealizarPagosComponent } from './realizar-pagos/realizar-pagos.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { PaginaHomeComponent } from './pagina-home/pagina-home.component';
+import { InicioComponent } from './inicio/inicio.component';
 import { TransactionViewComponent } from './transaction-view/transaction-view.component';
 
 
@@ -19,6 +26,9 @@ import { TransactionViewComponent } from './transaction-view/transaction-view.co
   declarations: [
     AppComponent,
     LoginComponent,
+    RealizarPagosComponent,
+    PaginaHomeComponent,
+    InicioComponent,
     TransactionViewComponent
   ],
   imports: [
@@ -29,7 +39,9 @@ import { TransactionViewComponent } from './transaction-view/transaction-view.co
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
