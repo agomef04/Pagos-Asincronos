@@ -32,7 +32,7 @@ public class TransferService {
         Transfer transferNuevo = new Transfer(transfer.getAmount(), transfer.getConcept(), new Date(), pendentState, accountOrigin , accountDestination);
 
         bankAccountService.moverDinero(accountOrigin, -transfer.getAmount());
-        bankAccountService.moverDinero(accountOrigin, transfer.getAmount());
+        bankAccountService.moverDinero(accountDestination, transfer.getAmount());
 
         return transferRepository.save(transferNuevo);
     }

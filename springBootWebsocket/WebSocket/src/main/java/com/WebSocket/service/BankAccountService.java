@@ -29,7 +29,7 @@ public class BankAccountService {
 
     public void moverDinero(BankAccount bankAccount, double amount) {
         bankAccount.setAmount(bankAccount.getAmount() + amount);
-        System.out.println(bankAccount.getAmount() + amount);
+        System.out.println("Dinero nuevo de la guenta -> " + (bankAccount.getAmount() + amount));
         bankAccountRepository.save(bankAccount);
     }
 
