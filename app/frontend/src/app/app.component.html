@@ -1,13 +1,5 @@
 
-<input class="form-control" type="text" placeholder="message" [(ngModel)]="input">
-<button class="btn btn-success" (click)="sendMessage()">Send</button>
-<div class="content">
-  <div *ngFor="let msg of websocketService.msg">
-    {{msg}}
-  </div>
-</div>
-
 <form class="example-form">
-   <!-- <app-login></app-login> -->
-  <app-pagina-home></app-pagina-home>
+   <app-login></app-login>
 </form>
+

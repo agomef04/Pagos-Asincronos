@@ -14,7 +14,6 @@ export class LoginComponent {
   constructor(private websocketService: WebsocketService) {}
 
   login() {
-    alert(this.email)
     this.websocketService.connect(this.email, this.password);
   }
 }
