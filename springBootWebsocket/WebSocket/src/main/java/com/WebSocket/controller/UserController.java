@@ -21,6 +21,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody User user) {
         // comprobar si existe usuario
+        System.out.println("METODO POST USUARIO -> " + user);
         if(userService.userExists(user)) {
             return ResponseEntity.badRequest().body("El usuario ya existe");
         }

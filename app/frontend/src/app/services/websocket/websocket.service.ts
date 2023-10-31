@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Client, Frame, Stomp, StompHeaders } from '@stomp/stompjs';
+import { Client, Frame, Stomp, StompHeaders} from '@stomp/stompjs';
+import * as SockJS from 'sockjs-client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
-  private stompClient: Client;
+  private serverUrl = 'ws://localhost:8080/gs-guide-websocket';
+  private stompClient: Client = new Client({brokerURL: this.serverUrl});
 
   constructor() {
-    this.stompClient = new Client({
-      brokerURL: 'ws://localhost:8080/gs-guide-websocket'
-    });
   }
 
-  connect(): void {
+  connect(email: string, pass: string): void {
+
+    const ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(ws);
+
+    this.stompClient.connectHeaders= {Ad: "x", login: email, passcode: pass}
+
+    this.stompClient.activate();
+
     this.stompClient.onConnect = (frame: Frame) => {
       console.log('Connected: ' + frame);
     };
@@ -31,19 +38,5 @@ export class WebsocketService {
   disconnect(): void {
     this.stompClient.deactivate();
     console.log("Disconnected");
-  }
-
-  sendName(name: string): void {
-    this.stompClient.publish({
-      destination: '/app/hello',
-      body: JSON.stringify({ 'name': name })
-    });
-  }
-
-  subscribeToGreetings(callback: (message: string) => void): void {
-    this.stompClient.subscribe('/topic/greetings', (greeting) => {
-      const content = JSON.parse(greeting.body).content;
-      callback(content);
-    });
   }
 }
