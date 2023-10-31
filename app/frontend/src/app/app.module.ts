@@ -21,6 +21,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { PaginaHomeComponent } from './pagina-home/pagina-home.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { TransactionViewComponent } from './transaction-view/transaction-view.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
+import { HeaderComponentComponent } from './header-component/header-component.component';
+import { BloqueadorDirective } from './register-page/bloqueador.directive';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { TransactionViewComponent } from './transaction-view/transaction-view.co
     RealizarPagosComponent,
     PaginaHomeComponent,
     InicioComponent,
-    TransactionViewComponent
+    TransactionViewComponent,
+    RegisterPageComponent,
+    HeaderComponentComponent,
+    BloqueadorDirective
   ],
   imports: [
     BrowserModule,
