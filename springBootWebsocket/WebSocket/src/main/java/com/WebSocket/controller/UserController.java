@@ -1,8 +1,9 @@
 package com.WebSocket.controller;
 
 
+import com.WebSocket.model.BankAccount;
 import com.WebSocket.model.User;
-import com.WebSocket.repository.UserRepository;
+import com.WebSocket.service.BankAccountService;
 import com.WebSocket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BankAccountService bankAccountService;
+
 
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody User user) {
@@ -27,7 +31,9 @@ public class UserController {
         }
 
         User createdUser = userService.createUser(user);
-        return new ResponseEntity<>(createdUser, HttpStatus.OK);
+        BankAccount account = bankAccountService.create(createdUser);
+
+        return new ResponseEntity<>(createdUser.toString() + account.toString(), HttpStatus.OK);
     }
 
     @GetMapping
