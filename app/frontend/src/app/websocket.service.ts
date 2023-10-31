@@ -16,16 +16,17 @@ export class WebsocketService {
     this.initializedWebSocketConnection();
   }
 
+
   initializedWebSocketConnection() {
     const serverUrl = 'http://localhost:8080/ws-endpoint';
     const ws = new SockJS(serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;
-    // tslint:disable-next-line:only-arrow-functions
-    this.stompClient.connect({}, function() {
-      that.stompClient.subscribe('/message', (message) => {
+    
+    this.stompClient.connect({}, (frame : any) => {
+      that.stompClient.subscribe('/message', (message : any) => {
         if (message.body) {
-          that.msg.push(message.body);
+          that.msg = message.body;
         }
       });
     });
