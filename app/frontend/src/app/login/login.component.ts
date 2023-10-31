@@ -15,6 +15,6 @@ export class LoginComponent {
 
   login() {
     alert(this.email)
-    this.websocketService.sendName(this.email);
+    this.websocketService.connect(this.email, this.password);
   }
 }
