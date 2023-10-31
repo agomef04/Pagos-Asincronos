@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { WebsocketService } from '../websocket.service';
 
 
 
@@ -15,7 +15,14 @@ export class RealizarPagosComponent {
   concept: string = '';
   amount: number = 0;
 
-  constructor() {}
+  constructor(private webSocketService: WebsocketService) {}
+
+  sendMessage() {
+    if (this.numberDestination) {
+      this.webSocketService.sendMessage(this.numberDestination);
+      this.numberDestination = '';
+    }
+  }
 
 
   onSubmit() {
