@@ -1,0 +1,35 @@
+.body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.title{
+    text-align: center;
+}
+  .container {
+    text-align: center;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 90%;
+  }
+  
+  .registerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .registerButton {
+    margin-top: 20px;
+  }
+
+  

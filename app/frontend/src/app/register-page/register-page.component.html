@@ -1,0 +1,29 @@
+<!--<p>register-page works!</p> -->
+
+<div class="body">
+    <div class="container">
+        <h1 class="title"> Registrarse </h1>
+        <mat-card-content class="full-width">
+            <form class="registerForm"> <!-- falta onSubmit() que verifique datos y añada a la bbdd -->
+                <mat-form-field class="full-width">
+                    <input id="userNameNR" matInput placeholder="Nombre de usuario *" required>
+                </mat-form-field>
+                <mat-form-field  class="full-width">
+                    <input id="userPhoneNR" matInput placeholder="Número de teléfono *" type="text" pattern="[0-9]{9}" required >
+                </mat-form-field>
+                <mat-form-field  class="full-width">
+                    <input id="userEmailNR" matInput placeholder="Email *" type="email" required >
+                </mat-form-field>
+                <mat-form-field  class="full-width">
+                    <input id="userPasswordNR" matInput placeholder="Contraseña *" type="password" required appBloqueador>
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Repite la contraseña *" type="password" required appBloqueador>
+                </mat-form-field>
+                <button mat-raised-button type="submit" color="primary" class="registerButton" type="submit"> Registrarse </button>
+                <br>
+                <button routerLink="/login">volver</button>
+            </form>
+        </mat-card-content>
+    </div>
+</div>

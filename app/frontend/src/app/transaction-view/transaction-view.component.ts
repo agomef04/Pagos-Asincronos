@@ -3,6 +3,7 @@ import {Transaction} from '../models/transaction.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { HeaderComponentComponent } from '../header-component/header-component.component';
 
 @Component({
   selector: 'transaction-view',
