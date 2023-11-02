@@ -34,22 +34,22 @@ public class UserController {
         }
 
         User createdUser = userService.createUser(user);
-        BankAccount account = bankAccountService.create(createdUser);
+        bankAccountService.create(createdUser);
 
-        return new ResponseEntity<>(createdUser.toString() + account.toString(), HttpStatus.OK);
+        return new ResponseEntity<>(createdUser, HttpStatus.OK);
     }
 
 
     @RequestMapping("/login")
     @GetMapping
     public ResponseEntity<?> loginUser(@RequestParam  String email, @RequestParam String password) {
-        System.out.println("Email ->" + email + ", Password -> " + password);
+        System.out.println("Email ->" + email + ", Password -> " + password.toString() );
         User userLogin = userService.loginUser(email,password);
         if(userLogin == null) {
             return ResponseEntity.badRequest().body("El usuario no existe");
         }
 
-        return new ResponseEntity<>(userLogin, HttpStatus.CREATED);
+        return new ResponseEntity<>(userLogin, HttpStatus.OK);
     }
 
 

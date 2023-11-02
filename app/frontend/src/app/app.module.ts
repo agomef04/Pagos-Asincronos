@@ -24,6 +24,7 @@ import { TransactionViewComponent } from './transaction-view/transaction-view.co
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { HeaderComponentComponent } from './header-component/header-component.component';
 import { BloqueadorDirective } from './register-page/bloqueador.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { BloqueadorDirective } from './register-page/bloqueador.directive';
     FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WebsocketService } from '../services/websocket/websocket.service';
+import { LoginService } from '../services/userOperations/userOperations.service';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +7,14 @@ import { WebsocketService } from '../services/websocket/websocket.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  
   email: string = '';
   password: string = '';
   textoInput: string = '';
 
-  constructor(private websocketService: WebsocketService) {}
+  constructor(private loginService: LoginService) {}
 
   login() {
-    this.websocketService.connect(this.email, this.password);
+    this.loginService.login(this.email, this.password);
   }
 }

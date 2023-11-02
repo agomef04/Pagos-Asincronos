@@ -24,9 +24,9 @@ export class WebsocketService {
     const that = this;
     
     this.stompClient.connect({}, (frame : any) => {
-      that.stompClient.subscribe('/message', (message : any) => {
+      this.stompClient.subscribe('/message', (message : any) => {
         if (message.body) {
-          that.msg = message.body;
+          this.msg = message.body;
         }
       });
     });
