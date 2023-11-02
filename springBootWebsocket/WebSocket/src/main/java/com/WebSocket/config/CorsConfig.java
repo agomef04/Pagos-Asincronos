@@ -13,7 +13,7 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true); // Permite credenciales
+        config.setAllowCredentials(false); // Permite credenciales
         config.addAllowedOrigin("http://localhost:4200"); // Origen permitido
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
