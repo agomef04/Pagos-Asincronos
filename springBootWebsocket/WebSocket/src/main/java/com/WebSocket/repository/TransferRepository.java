@@ -10,4 +10,6 @@ public interface TransferRepository extends CrudRepository<Transfer, Long> {
 
     List<Transfer> findByAccountOrigin(BankAccount bankAccount);
 
+    List<Transfer> findByAccountDestination(BankAccount bankAccount);
+
 }
