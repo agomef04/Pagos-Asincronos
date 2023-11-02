@@ -2,10 +2,14 @@ package com.WebSocket.service;
 
 import com.WebSocket.model.BankAccount;
 import com.WebSocket.model.User;
+import com.WebSocket.model.Transfer;
 import com.WebSocket.repository.BankAccountRepository;
 import com.WebSocket.repository.ElasticBankAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class BankAccountService {
@@ -16,7 +20,6 @@ public class BankAccountService {
     @Autowired
     private ElasticBankAccountRepository elasticBankAccountRepository;
 
-
     // comprobar que la cuenta destino existe -> account
     // comprobar que la cuenta origen existe -> account
     // comprobar que la cantidad a mover existe -> account
@@ -25,6 +28,17 @@ public class BankAccountService {
 
     public BankAccount create(User user) {
         return bankAccountRepository.save(new BankAccount(100.00, user));
+    }
+
+    public List<Transfer> getAccountTransfers(int idBankAccount){
+        List<Transfer> accountTransfers = new ArrayList<Transfer>();
+        
+        /*Iterar sobre el conjunto de transferencias y añadir a accountTransfers 
+         * aquellas que tengan la cuenta con idBankAccount por cuentaOrigen o por
+         * cuenta destino
+        */
+
+        return accountTransfers;
     }
 
     public void moverDinero(BankAccount bankAccount, double amount) {
