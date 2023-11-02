@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RestController
 public class TransferController {
 
     @Autowired
@@ -44,8 +45,9 @@ public class TransferController {
     }
 
 
-    @MessageMapping("/listTransfer")
-    @SendTo("/topic/transfers")
+
+    @RequestMapping("/listTransfer")
+    @GetMapping
     public ResponseEntity<?> listarTransferencias(@RequestParam BankAccount account) {
         System.out.println(" METODO GET LISTAR TRANSFERENCIAS -> " + account.toString());
 

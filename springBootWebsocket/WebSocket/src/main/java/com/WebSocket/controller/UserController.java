@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-@Controller
+@RestController
 @RequestMapping("/users")
 public class UserController {
 
@@ -25,8 +25,7 @@ public class UserController {
     private BankAccountService bankAccountService;
 
 
-    @MessageMapping("/createdUser")
-    @SendTo("/topic/newUser")
+    @RequestMapping("/newUser")
     public ResponseEntity<?> createUser(@RequestBody User user) {
         // comprobar si existe usuario
         System.out.println("METODO POST USUARIO -> " + user);
@@ -40,8 +39,9 @@ public class UserController {
         return new ResponseEntity<>(createdUser.toString() + account.toString(), HttpStatus.OK);
     }
 
-    @MessageMapping("/login")
-    @SendTo("/topic/loginStatus")
+
+    @RequestMapping("/login")
+    @GetMapping
     public ResponseEntity<?> loginUser(@RequestParam  String email, @RequestParam String password) {
         System.out.println("Email ->" + email + ", Password -> " + password);
         User userLogin = userService.loginUser(email,password);
