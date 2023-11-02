@@ -9,6 +9,7 @@ import com.WebSocket.repository.TransferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +38,13 @@ public class TransferService {
         return transferRepository.save(transferNuevo);
     }
 
+
+    public List<Transfer> listarTransfer (BankAccount bankAccount) {
+        List<Transfer> listTransfer = new ArrayList<>();
+        listTransfer.addAll(transferRepository.findByAccountOrigin(bankAccount));
+        listTransfer.addAll(transferRepository.findByAccountDestination(bankAccount));
+        return listTransfer;
+    }
 
     public Transfer save(Transfer transfer) {
         return transferRepository.save(transfer);

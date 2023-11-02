@@ -7,13 +7,14 @@ import com.WebSocket.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/transfer")
+import java.util.List;
+
+@Controller
 public class TransferController {
 
     @Autowired
@@ -21,7 +22,8 @@ public class TransferController {
     @Autowired
     private BankAccountService bankAccountService;
 
-    @PostMapping
+    @MessageMapping("/createdTransfer")
+    @SendTo("/topic/newTransfer")
     public ResponseEntity<?> createTransfer(@RequestBody Transfer transfer) {
         System.out.println(" METODO POST TRANSFERENCIA -> " + transfer);
 
@@ -39,12 +41,21 @@ public class TransferController {
 
         Transfer createTransfer = transferService.createTransfer(transfer, accountOrigin, accountDestination);
         return new ResponseEntity<>(createTransfer, HttpStatus.OK);
+    }
 
 
-        // comprobar que la cuenta destino existe -> account
-        // comprobar que la cuenta origen existe -> account
-        // comprobar que la cantidad a mover existe -> account
-            // es decir si me restas a mi esa cantiad si la tengo
-        // realizar movimiento --> transfer
+    @MessageMapping("/listTransfer")
+    @SendTo("/topic/transfers")
+    public ResponseEntity<?> listarTransferencias(@RequestParam BankAccount account) {
+        System.out.println(" METODO GET LISTAR TRANSFERENCIAS -> " + account.toString());
+
+        BankAccount bankAccount = bankAccountService.findById(account.getId()) ;
+        if(bankAccount == null) {
+            return ResponseEntity.badRequest().body("La cuenta no existe");
+        }
+
+        List<Transfer> listTransference = transferService.listarTransfer(bankAccount);
+
+        return new ResponseEntity<>(listTransference, HttpStatus.OK);
     }
 }

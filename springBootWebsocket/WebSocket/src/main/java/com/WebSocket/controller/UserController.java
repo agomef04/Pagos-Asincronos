@@ -8,10 +8,13 @@ import com.WebSocket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
 
@@ -22,7 +25,8 @@ public class UserController {
     private BankAccountService bankAccountService;
 
 
-    @PostMapping
+    @MessageMapping("/createdUser")
+    @SendTo("/topic/newUser")
     public ResponseEntity<?> createUser(@RequestBody User user) {
         // comprobar si existe usuario
         System.out.println("METODO POST USUARIO -> " + user);
@@ -36,8 +40,9 @@ public class UserController {
         return new ResponseEntity<>(createdUser.toString() + account.toString(), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String password) {
+    @MessageMapping("/login")
+    @SendTo("/topic/loginStatus")
+    public ResponseEntity<?> loginUser(@RequestParam  String email, @RequestParam String password) {
         System.out.println("Email ->" + email + ", Password -> " + password);
         User userLogin = userService.loginUser(email,password);
         if(userLogin == null) {
