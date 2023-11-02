@@ -1,35 +1,29 @@
 <app-header-component class="header"></app-header-component>
 <div class="container">
-    <h2>Realizar pago</h2>
-    <div class="form-container">
-        <form (ngSubmit)="onSubmit()">
-            <div class="form-row">
-                <mat-form-field >
-                <mat-label>Telefono</mat-label>
-                <span matPrefix>+34 &nbsp;</span>
-                <input type="tel" matInput placeholder="111-11-11-11" [(ngModel)]="numberDestination" name="numberDestination">
-                </mat-form-field>
-            </div>
+    <div class="main">
+        <h1>Realizar pago</h1>
+        <mat-card-content class="full-width">
+            <form class="login-form" (ngSubmit)="onSubmit()">
+                    <mat-form-field class="full-width">
+                        <mat-label>Telefono</mat-label>
+                        <span matPrefix>+34 &nbsp;</span>
+                        <input type="tel" matInput placeholder="111-11-11-11" [(ngModel)]="numberDestination" name="numberDestination">
+                    </mat-form-field>
 
-            <div class="form-row">
-                <mat-form-field >
-                    <mat-label>Cantidad</mat-label>
-                    <input matInput type="number" placeholder="20" [(ngModel)]="amount" name="amount">
-                </mat-form-field>
-            </div>
+                    <mat-form-field class="full-width">
+                        <mat-label>Cantidad</mat-label>
+                        <input matInput type="number" placeholder="20" [(ngModel)]="amount" name="amount">
+                    </mat-form-field>
 
-            <div class="form-row">
-                <mat-form-field >
-                    <mat-label>Concepto</mat-label>
-                    <input matInput #message maxlength="256" placeholder="Cafe y pincho tortilla" [(ngModel)]="concept" name="concept">
-                    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
-                </mat-form-field>
-            </div>
-
-            <div>
-                <button type="submit">Enviar</button>
-            </div>
-      </form>
+                    <mat-form-field class="full-width">
+                        <mat-label>Concepto</mat-label>
+                        <input matInput #message maxlength="256" placeholder="Ej: pincho de tortilla" [(ngModel)]="concept" name="concept">
+                        <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                    </mat-form-field>
+                    
+                    <button mat-raised-button color="primary" color="primary" class="login-button" type="submit">Enviar</button>
+        </form>
+        </mat-card-content>
     </div>
 </div>
 
