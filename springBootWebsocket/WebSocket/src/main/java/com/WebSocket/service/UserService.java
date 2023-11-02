@@ -2,13 +2,16 @@ package com.WebSocket.service;
 
 import com.WebSocket.model.BankAccount;
 import com.WebSocket.model.User;
+import com.WebSocket.model.documentElastic.LoginTrace;
 import com.WebSocket.model.documentElastic.UserElastic;
 import com.WebSocket.repository.BankAccountRepository;
+import com.WebSocket.repository.ElasticsearchLoginRepository;
 import com.WebSocket.repository.ElasticsearchUserRepository;
 import com.WebSocket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -20,6 +23,8 @@ public class UserService {
 
     @Autowired
     private  ElasticsearchUserRepository elasticsearchUserRepository;
+    @Autowired
+    private ElasticsearchLoginRepository elasticsearchLoginRepository;
 
 
     public User createUser(User user) {
@@ -42,9 +47,13 @@ public class UserService {
     }
     public User loginUser(String email, String password) {
         User existUser = userRepository.findByEmailAndPassword(email,password);
-        if(existUser == null) {
-            // excepcion nde no existe
+        if(existUser != null) {
+            LoginTrace newLoginTrace = new LoginTrace();
+            newLoginTrace.setUserId(existUser.getId());
+            newLoginTrace.setLoginTime(new Date());
+            elasticsearchLoginRepository.save(newLoginTrace);
         }
+        // excepcion null
         return existUser;
     }
 

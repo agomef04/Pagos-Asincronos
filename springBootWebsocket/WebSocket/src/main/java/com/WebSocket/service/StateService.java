@@ -3,7 +3,6 @@ package com.WebSocket.service;
 import com.WebSocket.model.State;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.WebSocket.repository.ElasticsearchStateRepository;
 import com.WebSocket.repository.StateRepository;
 
 public class StateService {
@@ -12,7 +11,7 @@ public class StateService {
     private StateRepository stateRepository;
     
     @Autowired
-    private  ElasticsearchStateRepository elasticsearchStateRepository;
+    private  StateRepository elasticsearchStateRepository;
 
     public State changeState(State state){
         //Fixear esTO

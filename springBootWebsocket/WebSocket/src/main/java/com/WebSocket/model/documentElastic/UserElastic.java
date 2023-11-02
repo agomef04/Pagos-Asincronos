@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-@Document(indexName = "user")
-public class UserElastic implements Serializable {
+@Document(indexName = "new_user")
+public class UserElastic{
 
     private int id;
     private String email;
