@@ -28,21 +28,9 @@ public class UserService {
 
 
     public User createUser(User user) {
-
-        //userRepository.deleteAll();
         User savedUser = userRepository.save(user);
-        //User user = new User("juan@gmail.com","password","juanito","987654321");
         UserElastic userElastic = new UserElastic(savedUser);
         elasticsearchUserRepository.save(userElastic);
-
-
-        List<UserElastic> retrievedUser =  elasticsearchUserRepository.findByName(user.getName());
-        if (retrievedUser != null) {
-            System.out.println("El usuario se ha guardado correctamente en Elasticsearch.");
-        } else {
-            System.err.println("El usuario no se ha guardado en Elasticsearch.");
-        }
-
         return savedUser;
     }
     public User loginUser(String email, String password) {

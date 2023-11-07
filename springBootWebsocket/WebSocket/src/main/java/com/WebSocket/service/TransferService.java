@@ -3,6 +3,7 @@ package com.WebSocket.service;
 import com.WebSocket.model.BankAccount;
 import com.WebSocket.model.State;
 import com.WebSocket.model.Transfer;
+import com.WebSocket.model.documentElastic.TransferTrace;
 import com.WebSocket.repository.ElasticTransferRepository;
 import com.WebSocket.repository.StateRepository;
 import com.WebSocket.repository.TransferRepository;
@@ -34,6 +35,15 @@ public class TransferService {
 
         bankAccountService.moverDinero(accountOrigin, -transfer.getAmount());
         bankAccountService.moverDinero(accountDestination, transfer.getAmount());
+
+        TransferTrace newTransfer = new TransferTrace();
+        newTransfer.setAmount(transfer.getAmount());
+        newTransfer.setConcept(transfer.getConcept());
+        newTransfer.setLoginTime(new Date());
+        newTransfer.setAccountOrigin(transfer.getAccountOrigin());
+        newTransfer.setAccountDestination(transfer.getAccountDestination());
+        newTransfer.setState(transfer.getState());
+        elasticTransferRepository.save(newTransfer);
 
         return transferRepository.save(transferNuevo);
     }

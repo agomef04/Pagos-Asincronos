@@ -25,6 +25,7 @@ public class TransferController {
 
     @MessageMapping("/createdTransfer")
     @SendTo("/topic/newTransfer")
+    @RequestMapping("/newTransfer")
     public ResponseEntity<?> createTransfer(@RequestBody Transfer transfer) {
         System.out.println(" METODO POST TRANSFERENCIA -> " + transfer);
 

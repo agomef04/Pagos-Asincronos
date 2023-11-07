@@ -12,7 +12,7 @@ public class Transfer implements Serializable {
     private int id;
     private double amount;
     private State state;
-    String concept;
+    private String concept;
     private Date date;
     @Lob // Anotación para indicar un campo Large Object (LOB)
     @Column(columnDefinition = "MEDIUMBLOB")
