@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../services/userOperations/userOperations.service';
+import { userOperationsService } from '../services/userOperations/userOperations.service';
 
 @Component({
   selector: 'app-register-page',
@@ -13,7 +13,7 @@ export class RegisterPageComponent {
   userPasswordNR: string = '';
   userPasswordNR2: string = '';
 
-  constructor(private loginService: LoginService) {}
+  constructor(private userOperationsService: userOperationsService) {}
 
   register() {
     console.log('Nombre de usuario:', this.userNameNR);
@@ -28,7 +28,7 @@ export class RegisterPageComponent {
     }
   
     // También puedes llamar a tu servicio y pasar estos datos
-    this.loginService.register(this.userNameNR, this.userPhoneNR, this.userEmailNR, this.userPasswordNR);
+    this.userOperationsService.register(this.userNameNR, this.userPhoneNR, this.userEmailNR, this.userPasswordNR);
   }
   
 }

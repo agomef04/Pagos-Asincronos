@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class userOperationsService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -37,7 +37,8 @@ export class LoginService {
     this.http.post('http://localhost:8080/users/newUser', userData, { observe: 'response' }).subscribe((response: HttpResponse<any>) => {
       console.log('Respuesta POST:', response);
       if (response.status === 200) {
-        this.router.navigate(['/inicio']);
+        alert("Se ha registrado con exito")
+        this.router.navigate(['/login']);
       }
       else{
         alert("El usuario ya existe");

@@ -14,7 +14,7 @@ export class TransactionViewComponent {
   displayedColumns: string[] = ['id','importe','numOrigen','numDestino','fecha','concepto']; // Lista de columnas a mostrar
   dataSource: MatTableDataSource<any>; // Fuente de datos de la tabla
 
-  @Input() transactions : Transaction[] = [{id:0,importe:1000,numeroOrigen:0,numeroDestino:0,fecha:new Date(),concepto:""}]
+  @Input() transactions : Transaction[] = [{id:0,importe:1000,numeroOrigen:0,numeroDestino:0,fecha:new Date(),concepto:"Prueba"}]
   constructor() {
     // Datos de ejemplo, reemplaza con tus datos reales
     const data = this.transactions

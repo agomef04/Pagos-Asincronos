@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../services/userOperations/userOperations.service';
+import { userOperationsService } from '../services/userOperations/userOperations.service';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +10,10 @@ export class LoginComponent {
   
   email: string = '';
   password: string = '';
-  textoInput: string = '';
 
-  constructor(private loginService: LoginService) {}
+  constructor(private userOperationsService: userOperationsService) {}
 
   login() {
-    this.loginService.login(this.email, this.password);
+    this.userOperationsService.login(this.email, this.password);
   }
 }
