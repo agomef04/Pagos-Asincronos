@@ -16,6 +16,8 @@ public class BankAccountService {
 
     @Autowired
     private BankAccountRepository bankAccountRepository;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private ElasticBankAccountRepository elasticBankAccountRepository;
@@ -27,7 +29,9 @@ public class BankAccountService {
     // realizar movimiento --> transfer
 
     public BankAccount create(User user) {
-        return bankAccountRepository.save(new BankAccount(100.00, user));
+        BankAccount account = new BankAccount(100.00, user);
+        //user.setBankAccount(account);
+        return bankAccountRepository.save(account);
     }
 
     public List<Transfer> getAccountTransfers(int idBankAccount){
@@ -58,5 +62,10 @@ public class BankAccountService {
 
     public BankAccount findById(int id) {
         return bankAccountRepository.findById(id);
+    }
+
+    public BankAccount findByNumberPhone(String numberPhone) {
+        User user = userService.findByNumberPhone(numberPhone);
+        return bankAccountRepository.findByUser(user);
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RestController
@@ -26,22 +27,27 @@ public class TransferController {
     @MessageMapping("/createdTransfer")
     @SendTo("/topic/newTransfer")
     @RequestMapping("/newTransfer")
-    public ResponseEntity<?> createTransfer(@RequestBody Transfer transfer) {
-        System.out.println(" METODO POST TRANSFERENCIA -> " + transfer);
+    public ResponseEntity<?> createTransfer(@RequestBody Map<String, Object> transferData) {
+        System.out.println(" METODO POST TRANSFERENCIA -> " + transferData);
 
-        BankAccount accountOrigin = bankAccountService.findById(transfer.getAccountOrigin().getId());
+        BankAccount accountOrigin = bankAccountService.findById((Integer) transferData.get("bankAccountOrigin"));
+
         if(accountOrigin == null) {
             return ResponseEntity.badRequest().body("La cuenta origen no existe");
         }
-        BankAccount accountDestination = bankAccountService.findById(transfer.getAccountDestination().getId());
+        BankAccount accountDestination = bankAccountService.findByNumberPhone((String) transferData.get("numberPhone"));
         if(accountDestination == null) {
             return ResponseEntity.badRequest().body("La cuenta destino no existe");
         }
-        if(!bankAccountService.heHasThisAmount(accountOrigin, transfer.getAmount())) {
+        double amount = (double) transferData.get("amount");
+        if(!bankAccountService.heHasThisAmount(accountOrigin, amount)) {
             return ResponseEntity.badRequest().body("La cantidad no esta disponible");
         }
 
-        Transfer createTransfer = transferService.createTransfer(transfer, accountOrigin, accountDestination);
+
+        String idConexion = "idConexion";
+
+        Transfer createTransfer = transferService.createTransfer(amount, (String) transferData.get("concept"), accountOrigin, accountDestination , idConexion);
         return new ResponseEntity<>(createTransfer, HttpStatus.OK);
     }
 

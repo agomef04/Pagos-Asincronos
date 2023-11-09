@@ -53,6 +53,9 @@ public class UserService {
         return userRepository.findByName(name);
     }
 
+    public User findByNumberPhone(String numberPhone) {
+        return userRepository.findByPhoneNumber(numberPhone);
+    }
 
     public boolean userExists(User user) {
         return userRepository.existsByEmail(user.getEmail()) || userRepository.existsByPhoneNumber(user.getPhoneNumber());

@@ -11,15 +11,21 @@ public class Transfer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private double amount;
+    @OneToOne
+    @JoinColumn(name = "state")
     private State state;
     private String concept;
     private Date date;
-    @Lob // Anotación para indicar un campo Large Object (LOB)
-    @Column(columnDefinition = "MEDIUMBLOB")
+
+    @OneToOne
+    @JoinColumn(name = "bankAccount_origin_id")
     private BankAccount accountOrigin;
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
+
+    @OneToOne
+    @JoinColumn(name = "bank_account_destination_id")
     private BankAccount accountDestination;
+
+    private String idConexion;
 
     public Transfer() {
 
@@ -35,7 +41,7 @@ public class Transfer implements Serializable {
         this.accountDestination = accountDestination;
     }
 
-    public Transfer(double amount, String concept, Date date, State state, BankAccount accountOrigin, BankAccount accountDestination) {
+    public Transfer(double amount, String concept, Date date, State state, BankAccount accountOrigin, BankAccount accountDestination, String idConexion) {
 
         this.amount = amount;
         this.concept = concept;
@@ -43,6 +49,15 @@ public class Transfer implements Serializable {
         this.state = state;
         this.accountOrigin = accountOrigin;
         this.accountDestination = accountDestination;
+        this.idConexion = idConexion;
+    }
+
+    public String getIdConexion() {
+        return idConexion;
+    }
+
+    public void setIdConexion(String idConexion) {
+        this.idConexion = idConexion;
     }
 
     public int getId() {

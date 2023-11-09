@@ -19,6 +19,7 @@ public class User implements Serializable {
     private String name;
     private String phoneNumber;
 
+
     public User() {
 
     }
@@ -52,6 +53,7 @@ public class User implements Serializable {
     public void setId(int idUser) {
         this.id = idUser;
     }
+
 
     public String getEmail() {
         return email;

@@ -29,25 +29,25 @@ public class TransferService {
     private ElasticTransferRepository elasticTransferRepository;
 
 
-    public Transfer createTransfer(Transfer transfer, BankAccount accountOrigin, BankAccount accountDestination) {
-        State pendentState = stateRepository.findByNameState("PENDIENTE");
-        Transfer transferNuevo = new Transfer(transfer.getAmount(), transfer.getConcept(), new Date(), pendentState, accountOrigin , accountDestination);
+    public Transfer createTransfer(double amount, String concept, BankAccount accountOrigin, BankAccount accountDestination, String idConexion) {
+        State pendentState = stateRepository.findByNameState("Pendiente");
+        Transfer transferNuevo = new Transfer(amount, concept, new Date(), pendentState, accountOrigin , accountDestination, idConexion);
 
-        bankAccountService.moverDinero(accountOrigin, -transfer.getAmount());
-        bankAccountService.moverDinero(accountDestination, transfer.getAmount());
+        //bankAccountService.moverDinero(accountOrigin, -amount);
+        //bankAccountService.moverDinero(accountDestination, amount);
 
         TransferTrace newTransfer = new TransferTrace();
-        newTransfer.setAmount(transfer.getAmount());
-        newTransfer.setConcept(transfer.getConcept());
+        newTransfer.setAmount(amount);
+        newTransfer.setConcept(concept);
         newTransfer.setLoginTime(new Date());
-        newTransfer.setAccountOrigin(transfer.getAccountOrigin());
-        newTransfer.setAccountDestination(transfer.getAccountDestination());
-        newTransfer.setState(transfer.getState());
+        newTransfer.setAccountOrigin(accountOrigin);
+        newTransfer.setAccountDestination(accountDestination);
+        newTransfer.setState(pendentState);
         elasticTransferRepository.save(newTransfer);
 
         return transferRepository.save(transferNuevo);
-    }
 
+    }
 
     public List<Transfer> listarTransfer (BankAccount bankAccount) {
         List<Transfer> listTransfer = new ArrayList<>();

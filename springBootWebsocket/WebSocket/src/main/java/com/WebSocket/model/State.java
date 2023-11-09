@@ -11,22 +11,31 @@ public class State implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String nameState;
-    String description;
+    private  int id;
+    private  String nameState;
+    private  String description;
 
     public State() {
 
     }
+
     public State(int id, String nameState, String description) {
         this.id = id;
         this.nameState = nameState;
         this.description = description;
     }
 
-    public State(String nameState, String description) {
-        this.id = id;
-        this.nameState = nameState;
-        this.description = description;
+    public int getId() {
+        return id;
     }
+
+    public String getNameState() {
+        return nameState;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+
 }

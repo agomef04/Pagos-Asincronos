@@ -1,9 +1,6 @@
 package com.WebSocket.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -13,6 +10,8 @@ public class BankAccount implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private double Amount;
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public BankAccount() {

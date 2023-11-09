@@ -6,7 +6,7 @@ declare var Stomp : any;
   providedIn: 'root'
 })
 export class websocketTransacciones {
-  private serverUrl = 'http://localhost:8080/';
+  private serverUrl = 'http://localhost:8080/ws-endpoint';
   public stompClient : any;
   public msg = []
 

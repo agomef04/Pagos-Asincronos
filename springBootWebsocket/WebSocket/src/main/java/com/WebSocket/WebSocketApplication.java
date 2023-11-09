@@ -13,11 +13,7 @@ import java.util.Date;
 public class WebSocketApplication {
 
 	public static void main(String[] args) {
-
 		ConfigurableApplicationContext context = SpringApplication.run(WebSocketApplication.class);
-		//context.close();
-
-
 	}
 
 }
