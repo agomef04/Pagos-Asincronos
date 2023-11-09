@@ -10,8 +10,11 @@ public class MessageSender {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
-    public void sendMessage(String queueName, String message) {
+    public void sendMessage(String queueName, String message, int idTransfer, String idConexion) {
 
-        rabbitTemplate.convertAndSend(queueName, message);
+        String msg = message + " IdTransferencia: " + idTransfer + "IdConexion: " + idConexion;
+
+        rabbitTemplate.convertAndSend(queueName, msg);
     }
+
 }

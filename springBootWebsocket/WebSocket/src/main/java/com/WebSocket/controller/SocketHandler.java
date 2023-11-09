@@ -1,4 +1,4 @@
 package com.WebSocket.controller;
 
-public class WebSocketController {
+public class SocketHandler {
 }
