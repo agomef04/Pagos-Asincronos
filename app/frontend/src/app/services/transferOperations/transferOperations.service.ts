@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Transaction } from 'src/app/models/transaction.model';
-import {BankAccount} from 'src/app/models/bankAccount.model';
 import { Observable } from 'rxjs';
 
 @Injectable({

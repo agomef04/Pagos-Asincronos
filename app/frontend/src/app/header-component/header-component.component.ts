@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { userOperationsService } from './../services/userOperations/userOperations.service';
 
 @Component({
   selector: 'app-header-component',
@@ -6,7 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./header-component.component.css']
 })
 export class HeaderComponentComponent {
-  numberOrigin: string = '00000000';
-  name: string = 'Alvaro Gomez';
-  email: string = 'alvaro@gmail.com';
+  constructor(private userOps: userOperationsService) {}
+
+  datoUsuario = {
+    numberOrigin: this.userOps.phoneNumber,
+    name: this.userOps.name,
+    email: this.userOps.email
+  };
+  
 }

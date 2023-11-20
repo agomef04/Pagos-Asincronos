@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HeaderComponentComponent } from '../header-component/header-component.component';
+import { RealizarPagosComponent } from './../realizar-pagos/realizar-pagos.component';
 
 @Component({
   selector: 'app-inicio',

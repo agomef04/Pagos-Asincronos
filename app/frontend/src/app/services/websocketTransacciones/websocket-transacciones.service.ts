@@ -30,4 +30,17 @@ export class websocketTransacciones {
     this.stompClient.deactivate();
     console.log("Disconnected");
   }
+
+  sendMoney(tlfDest: string, amount: Number, concept: string, phoneNumber: string): void {
+
+    let message: any = {
+      "amount": amount,
+      "concept": concept,
+      "bankAccountOrigin": phoneNumber,
+      "numberPhone": tlfDest
+    };
+  
+    this.stompClient.send("/app/createdTransfer", message);
+    console.log("Money sent");
+  }
 }

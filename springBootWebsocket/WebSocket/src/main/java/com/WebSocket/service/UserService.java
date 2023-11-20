@@ -39,7 +39,7 @@ public class UserService {
             LoginTrace newLoginTrace = new LoginTrace();
             newLoginTrace.setUserId(existUser.getId());
             newLoginTrace.setLoginTime(new Date());
-            elasticsearchLoginRepository.save(newLoginTrace);
+            //elasticsearchLoginRepository.save(newLoginTrace);
         }
         // excepcion null
         return existUser;

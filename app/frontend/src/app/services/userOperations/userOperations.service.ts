@@ -7,6 +7,12 @@ import { Router } from '@angular/router';
 })
 export class userOperationsService {
 
+  email : string = '';
+  id : number = 0;
+  name : string = '';
+  password : string = '';
+  phoneNumber : string = '';
+
   constructor(private http: HttpClient, private router: Router) { }
 
   login(email: string, password: string){
@@ -21,6 +27,8 @@ export class userOperationsService {
 
       if(response.status === 200){
         this.router.navigate(['/inicio']);
+        this.setUserData(response.body);
+        console.log(response.body)
       }
       
     });
@@ -44,6 +52,16 @@ export class userOperationsService {
         alert("El usuario ya existe");
       }
     });
-
   }
+
+  setUserData(data: { email: string, id: number, name: string, password: string, phoneNumber: string }){
+    this.email = data.email;
+    this.id = data.id;
+    this.name = data.name;
+    this.password = data.password;
+    this.phoneNumber = data.phoneNumber;
+  }
+
+
+
 }

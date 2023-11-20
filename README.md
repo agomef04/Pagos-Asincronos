@@ -9,7 +9,7 @@ Spring Boot con maven, v 2.7.16
 
 Elastic v
 
-
+Comentario en linea 42 UserService para que no use elastic
 
 DIRECCION SPRINGBOOT
 
