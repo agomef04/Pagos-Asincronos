@@ -16,10 +16,6 @@ export class LoginComponent {
 
   login() {
     this.userOperationsService.login(this.email, this.password);
-    this.conectarWebsocket();
   }
 
-  conectarWebsocket(){
-    this.websocketTransacciones.connect(this.email);
-  }
 }
