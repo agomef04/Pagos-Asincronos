@@ -17,7 +17,7 @@ export class HeaderComponentComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.websocketTransacciones.connect(this.userOps.email)
+    //this.websocketTransacciones.connect(this.userOps.email)
   }
   
 }
