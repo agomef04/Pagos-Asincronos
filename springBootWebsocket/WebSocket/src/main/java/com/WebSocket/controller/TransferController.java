@@ -1,5 +1,6 @@
 package com.WebSocket.controller;
 
+import com.WebSocket.config.WebSocketMessageSender;
 import com.WebSocket.model.BankAccount;
 import com.WebSocket.model.Transfer;
 import com.WebSocket.service.BankAccountService;
@@ -7,8 +8,11 @@ import com.WebSocket.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +28,21 @@ public class TransferController {
     @Autowired
     private BankAccountService bankAccountService;
 
+    @Autowired
+    private WebSocketMessageSender messageSender;
+
     @MessageMapping("/createdTransfer")
     @SendTo("/topic/newTransfer")
-    @RequestMapping("/newTransfer")
-    public ResponseEntity<?> createTransfer(@RequestBody Map<String, Object> transferData) {
+    //@RequestMapping("/newTransfer")
+    //public ResponseEntity<?> createTransfer(@RequestBody Map<String, Object> transferData) {
+    public ResponseEntity<?> createTransfer(Message<?> message) {
+        Map<String, Object> transferData = (Map<String, Object>) message.getPayload();
         System.out.println(" METODO POST TRANSFERENCIA -> " + transferData);
+        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(message);
+
+        String idConexion = "id";
+        //String idConexion = headerAccessor.getSessionId();
+        System.out.println("ID conexion websocket = " + idConexion);
 
         BankAccount accountOrigin = bankAccountService.findById((Integer) transferData.get("bankAccountOrigin"));
 
@@ -44,11 +58,16 @@ public class TransferController {
             return ResponseEntity.badRequest().body("La cantidad no esta disponible");
         }
 
-
-        String idConexion = "idConexion";
-
         Transfer createTransfer = transferService.createTransfer(amount, (String) transferData.get("concept"), accountOrigin, accountDestination , idConexion);
-        return new ResponseEntity<>(createTransfer, HttpStatus.OK);
+        //return new ResponseEntity<>(createTransfer, HttpStatus.OK);
+        return ResponseEntity.ok("Transferencia en procesada exitosa");
+    }
+
+    @GetMapping("/createdTransfer/{sessionId}")
+    public ResponseEntity<?> sendToUser(@PathVariable String sessionId) {
+        String message = "pago aceptado";
+        messageSender.sendMessageToUser(sessionId, message);
+        return ResponseEntity.ok("Mensaje enviado");
     }
 
 
