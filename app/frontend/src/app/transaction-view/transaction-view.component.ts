@@ -7,6 +7,7 @@ import { HeaderComponentComponent } from '../header-component/header-component.c
 import { ViewTransactionService } from '../services/transferOperations/transferOperations.service';
 import {finalize} from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
+import { userOperationsService } from '../services/userOperations/userOperations.service';
 
 @Component({
   selector: 'transaction-view',
@@ -18,7 +19,7 @@ export class TransactionViewComponent {
   dataSource: MatTableDataSource<any> = new MatTableDataSource; // Fuente de datos de la tabla
 
   @Input() transactions : Transaction[] = [{id:0,importe:1000,numeroOrigen:0,numeroDestino:0,fecha:new Date(),concepto:"Prueba",estado : "Pendiente"},{id:20,importe:1000,numeroOrigen:0,numeroDestino:0,fecha:new Date(),concepto:"Prueba",estado : "Pendiente"}]
-  constructor(private viewTransactionService: ViewTransactionService) {
+  constructor(private viewTransactionService: ViewTransactionService,private userService: userOperationsService) {
     this.renderTransactions()
   }
 
@@ -26,7 +27,7 @@ export class TransactionViewComponent {
     var bankAccount : any
     var userTransactions : any
     try {
-      bankAccount = await this.viewTransactionService.getBankAccount(3);
+      bankAccount = await this.viewTransactionService.getBankAccount(this.userService.id);
       alert("Hemos traido la cuenta");
       userTransactions = await this.viewTransactionService.showTransfer(bankAccount);
       // Continúa con la ejecución aquí
