@@ -25,7 +25,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { HeaderComponentComponent } from './header-component/header-component.component';
 import { BloqueadorDirective } from './register-page/bloqueador.directive';
 import { HttpClientModule } from '@angular/common/http';
-
+import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -53,7 +53,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{provide:LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
