@@ -1,6 +1,5 @@
 package com.WebSocket.config;
 
-import com.WebSocket.controller.WebSocketChannelIntercerceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;

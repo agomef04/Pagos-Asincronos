@@ -1,4 +1,4 @@
-package com.WebSocket.controller;
+package com.WebSocket.config;
 
 import com.WebSocket.config.WebSocketSessionRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
