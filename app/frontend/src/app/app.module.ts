@@ -25,6 +25,9 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { HeaderComponentComponent } from './header-component/header-component.component';
 import { BloqueadorDirective } from './register-page/bloqueador.directive';
 import { HttpClientModule } from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSliderModule } from '@angular/material/slider';
+
 
 
 @NgModule({
@@ -51,7 +54,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
