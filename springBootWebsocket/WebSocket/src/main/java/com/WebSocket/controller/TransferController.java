@@ -20,6 +20,7 @@ import org.springframework.web.socket.WebSocketSession;
 import java.net.http.WebSocket;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RestController
@@ -41,6 +42,10 @@ public class TransferController {
         String idConexion = headerAccessor.getSessionId();
         Map<String, List<String>> nativeHeaders = (Map<String, List<String>>) transferData.getHeaders().get("nativeHeaders");
 
+        if(Objects.equals((String) getValueFromHeaders(nativeHeaders, "bankAccountOrigin"), (String) getValueFromHeaders(nativeHeaders, "numberPhone"))) {
+            return "Cuenta destino y origen es la misma";
+        }
+
         BankAccount accountOrigin = bankAccountService.findByNumberPhone((String) getValueFromHeaders(nativeHeaders, "bankAccountOrigin"));
 
         if(accountOrigin == null) {
@@ -50,6 +55,7 @@ public class TransferController {
         if(accountDestination == null) {
             return "La cuenta destino no existe";
         }
+
         double amount = Double.parseDouble(getValueFromHeaders(nativeHeaders, "amount"));
         if(!bankAccountService.heHasThisAmount(accountOrigin, amount) && amount > 0.00) {
             return "La cantidad no esta disponible";
