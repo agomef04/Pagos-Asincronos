@@ -33,15 +33,13 @@ public class TransferController {
     @Autowired
     private WebSocketMessageSender messageSender;
 
-    @MessageMapping("")
+    @MessageMapping("/createdTransfer")
     @SendTo("/topic/newTransfer")
-
-    public String createTransfer(Message transferData, SimpMessageHeaderAccessor headerAccessor, WebSocketSession session) {
+    public String createTransfer(Message transferData, SimpMessageHeaderAccessor headerAccessor) {
 
         //System.out.println(" METODO POST TRANSFERENCIA -> " + transferData.getHeaders());
         String idConexion = headerAccessor.getSessionId();
         Map<String, List<String>> nativeHeaders = (Map<String, List<String>>) transferData.getHeaders().get("nativeHeaders");
-        System.out.println("Session ---> " + session);
 
         BankAccount accountOrigin = bankAccountService.findByNumberPhone((String) getValueFromHeaders(nativeHeaders, "bankAccountOrigin"));
 

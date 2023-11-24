@@ -38,6 +38,7 @@ public class TransferValidationService {
 
 
     @Scheduled(fixedRate = 30000)
+    // 30000 para 30s
     public void validacionTransferencias() {
 
         State statePendiente = stateRepository.findByNameState("Pendiente");

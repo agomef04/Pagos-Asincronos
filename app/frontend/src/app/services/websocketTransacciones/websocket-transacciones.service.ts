@@ -18,7 +18,7 @@ export class websocketTransacciones {
     this.stompClient = Stomp.over(ws);
 
     this.stompClient.connect({}, (frame : any) => {
-      this.stompClient.subscribe(`/topic/transfer/${email}`, (message : any) => {
+      this.stompClient.subscribe(`/topic/newTransfer/${email}`, (message : any) => {
         if (message.body) {
           alert(message.body);
         }

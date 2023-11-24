@@ -12,7 +12,7 @@ public class MessageSender {
 
     public void sendMessage(String queueName, String message, int idTransfer, String idConexion) {
 
-        String msg = message + ", " + idTransfer + ", " + idConexion;
+        String msg = message + ", " + idConexion;
 
         rabbitTemplate.convertAndSend(queueName, msg);
     }

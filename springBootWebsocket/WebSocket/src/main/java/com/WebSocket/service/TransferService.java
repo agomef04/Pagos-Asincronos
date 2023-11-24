@@ -33,9 +33,6 @@ public class TransferService {
         State pendentState = stateRepository.findByNameState("Pendiente");
         Transfer transferNuevo = new Transfer(amount, concept, new Date(), pendentState, accountOrigin , accountDestination, idConexion);
 
-        //bankAccountService.moverDinero(accountOrigin, -amount);
-        //bankAccountService.moverDinero(accountDestination, amount);
-
         TransferTrace newTransfer = new TransferTrace();
         newTransfer.setAmount(amount);
         newTransfer.setConcept(concept);
