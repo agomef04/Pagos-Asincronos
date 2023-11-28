@@ -12,6 +12,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,9 @@ public class TransferController {
     @Autowired
     private WebSocketMessageSender messageSender;
 
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
+
     @MessageMapping("/createdTransfer")
     @SendTo("/topic/newTransfer")
     public String createTransfer(Message transferData, SimpMessageHeaderAccessor headerAccessor) {
@@ -43,21 +47,25 @@ public class TransferController {
         Map<String, List<String>> nativeHeaders = (Map<String, List<String>>) transferData.getHeaders().get("nativeHeaders");
 
         if(Objects.equals((String) getValueFromHeaders(nativeHeaders, "bankAccountOrigin"), (String) getValueFromHeaders(nativeHeaders, "numberPhone"))) {
+            System.out.println("Cuenta destino y origen es la misma");
             return "Cuenta destino y origen es la misma";
         }
 
         BankAccount accountOrigin = bankAccountService.findByNumberPhone((String) getValueFromHeaders(nativeHeaders, "bankAccountOrigin"));
 
         if(accountOrigin == null) {
+            System.out.println("La cuenta origen no existe");
             return "La cuenta origen no existe";
         }
         BankAccount accountDestination = bankAccountService.findByNumberPhone((String) getValueFromHeaders(nativeHeaders, "numberPhone"));
         if(accountDestination == null) {
+            System.out.println("La cuenta destino no existe");
             return "La cuenta destino no existe";
         }
 
         double amount = Double.parseDouble(getValueFromHeaders(nativeHeaders, "amount"));
         if(!bankAccountService.heHasThisAmount(accountOrigin, amount) && amount > 0.00) {
+            System.out.println("La cantidad no esta disponible");
             return "La cantidad no esta disponible";
         }
 
