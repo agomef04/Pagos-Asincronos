@@ -74,15 +74,6 @@ public class TransferController {
     }
 
 
-    @GetMapping("/createdTransfer/{sessionId}")
-    public ResponseEntity<?> sendToUser(@PathVariable String sessionId) {
-        String message = "pago aceptado";
-        //messageSender.sendMessageToUser(sessionId, message);
-        return ResponseEntity.ok("Mensaje enviado");
-    }
-
-
-
     @RequestMapping("/listTransfer")
     @GetMapping
     public ResponseEntity<?> listarTransferencias(@RequestParam String phoneNumber) {
