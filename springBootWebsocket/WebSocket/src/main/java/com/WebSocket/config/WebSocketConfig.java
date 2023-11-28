@@ -43,12 +43,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/ws-endpoint").setAllowedOrigins("http://localhost:4200").withSockJS();    // configura el punto de conexion webSocket
     }
 
-    /**
-    @Override
-    public void configureClientInboundChannel(ChannelRegistration registration) {
-        registration.interceptors(new WebSocketChannelIntercerceptor());
-    }
-    */
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
         registration.interceptors(new ChannelInterceptorAdapter() {
@@ -60,8 +54,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                     // Guardar la sesión WebSocket con su identificador al establecer la conexión
                     String sessionId = accessor.getSessionId();
                     SimpMessagingTemplate simpMessagingTemplate = new SimpMessagingTemplate(channel);
-                    //WebSocketSession session = (WebSocketSession) message.getHeaders().get("simpSessionAttributes").get("HTTP_SESSION");
-                    //System.out.println("\t(" + sessionId + "," + simpMessagingTemplate.toString() + ")");
                     System.out.println("\t(" + sessionId + "," + accessor.getDestination() + ")");
                     customWebSocketHandler.addSession(sessionId, accessor.getDestination());
                 }

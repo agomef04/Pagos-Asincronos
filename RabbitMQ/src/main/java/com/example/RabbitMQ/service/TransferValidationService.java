@@ -64,7 +64,7 @@ public class TransferValidationService {
     }
 
 
-    public Transfer aceptarPago(Transfer t) {
+    public void aceptarPago(Transfer t) {
 
         BankAccount accountOrigin = bankAccountRepository.findById(t.getAccountOrigin().getId());
         BankAccount accountDest = bankAccountRepository.findById(t.getAccountDestination().getId());
@@ -81,12 +81,10 @@ public class TransferValidationService {
         bankAccountRepository.save(accountDest);
 
         messageSender.sendMessage(queueName, "Aceptado", t.getId(), t.getIdConexion());
-        return null;
     }
 
-    public Transfer denegarPago(Transfer t) {
+    public void denegarPago(Transfer t) {
         messageSender.sendMessage(queueName, "Rechazada", t.getId(), t.getIdConexion());
-        return null;
     }
 
 }

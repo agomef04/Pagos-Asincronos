@@ -1,11 +1,9 @@
 package com.WebSocket.repository;
 
-import com.WebSocket.model.BankAccount;
-import com.WebSocket.model.Transfer;
-import com.WebSocket.model.documentElastic.TransferTrace;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
+import com.WebSocket.model.documentElastic.TransferTrace;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.stereotype.Repository;
 @Repository
-public interface ElasticTransferRepository extends CrudRepository<TransferTrace, Long> {
+public interface ElasticTransferRepository extends ElasticsearchRepository<TransferTrace, String> {
 }

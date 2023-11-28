@@ -1,5 +1,8 @@
 package com.WebSocket.config;
 
+import com.WebSocket.model.Transfer;
+import com.WebSocket.service.BankAccountService;
+import com.WebSocket.service.TransferService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
@@ -21,6 +24,9 @@ public class WebSocketMessageSender {
     private final CustomWebSocketHandler customWebSocketHandler;
 
     @Autowired
+    private TransferService transferService;
+
+    @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
     public WebSocketMessageSender(CustomWebSocketHandler customWebSocketHandler) {
@@ -36,26 +42,31 @@ public class WebSocketMessageSender {
         String sessionId = parts[1].trim();
 
         String canal = customWebSocketHandler.getSessionById(sessionId);
-        System.out.println("\t(" + sessionId + "," + canal.toString() + ")");
+        if(canal != null) {
+            System.out.println("\t(" + sessionId + "," + canal.toString() + ")");
 
-        if(estado.equals("Aceptado")) {
-            try {
-                messagingTemplate.convertAndSend(canal, "Pago aceptado");
-                System.out.println("Mensaje enviado exitosamente a: " + canal);
-            } catch (Exception e) {
-                System.out.println("Error al enviar el mensaje a: " + canal);
-                e.printStackTrace();
+            Transfer t = transferService.findByidConexion(sessionId);
+
+            if(estado.equals("Aceptado")) {
+                try {
+                    messagingTemplate.convertAndSend(canal, "Pago ACEPTADO \n\t- Id: "+t.getId() +"\n\t- Destino: +34 " + t.getAccountDestination().getUser().getPhoneNumber() + "\n\t- Cantidad: "+t.getAmount()+"\n\t- Concepto: "+t.getConcept());
+                    System.out.println("Mensaje enviado exitosamente a: " + canal);
+                } catch (Exception e) {
+                    System.out.println("Error al enviar el mensaje a: " + canal);
+                    e.printStackTrace();
+                }
+            }
+            if(estado.equals("Rechazada")) {
+                try {
+                    messagingTemplate.convertAndSend(canal, "Pago RECHAZADO \n\t- Id: "+t.getId() +"\n\t- Destino: +34 " + t.getAccountDestination().getUser().getPhoneNumber() + "\n\t- Cantidad: "+t.getAmount()+"\n\t- Concepto: "+t.getConcept());
+                    System.out.println("Mensaje enviado exitosamente a: " + canal);
+                } catch (Exception e) {
+                    System.out.println("Error al enviar el mensaje a: " + canal);
+                    e.printStackTrace();
+                }
             }
         }
-        if(estado.equals("Rechazada")) {
-            try {
-                messagingTemplate.convertAndSend(canal, "Pago rechazado");
-                System.out.println("Mensaje enviado exitosamente a: " + canal);
-            } catch (Exception e) {
-                System.out.println("Error al enviar el mensaje a: " + canal);
-                e.printStackTrace();
-            }
-        }
+
 
     }
 

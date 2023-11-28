@@ -2,9 +2,8 @@ package com.WebSocket.model.documentElastic;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
-
-import java.io.Serializable;
 import java.util.Date;
+
 @Document(indexName = "login_trace")
 public class LoginTrace{
 

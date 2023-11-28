@@ -11,8 +11,8 @@ import java.util.Date;
 public class TransferTrace {
 
     @Id
+    private String id;
     private int transferId;
-
     private double amount;
     private State state;
     String concept;
@@ -32,6 +32,14 @@ public class TransferTrace {
         this.accountOrigin = accountOrigin;
         this.accountDestination = accountDestination;
         this.loginTime = loginTime;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getTransferId() {
