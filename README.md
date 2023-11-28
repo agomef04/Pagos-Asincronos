@@ -1,4 +1,6 @@
 # Pagos-Asincronos
+
+## Equema aplicacion
 ![Esquema aplicacion](Esquema.png)
 
 
@@ -8,7 +10,14 @@
 
 ## Diagramas de secuencia
 
-![Diagrama secuencia - Crear usuario](DiagramaSecuencia_CrearUsuario.drawio.png)
+### Crear Usuario
+![Diagrama secuencia - Crear usuario]()
+### Login Usuario
+![Diagrama secuencia - Login usuario]()
+### Crear Transferencia
+![Diagrama secuencia - Crear Transferencia]()
+### Listar Transferencias
+![Diagrama secuencia - Listar transferencias]()
 
 
 
