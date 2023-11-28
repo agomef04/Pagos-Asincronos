@@ -5,9 +5,11 @@
 
 Version Java 11
 
-Spring Boot con maven, v 2.7.16
+Spring Boot con maven -> 2.7.16
 
-Elastic v
+Elastic -> 7.17.14
+
+RabbitMQ -> 3.8.2
 
 Comentario en linea 42 UserService para que no use elastic
 
