@@ -11,7 +11,7 @@
 ## Diagramas de secuencia
 
 ### Crear Usuario
-![Diagrama secuencia - Crear usuario]()
+![Diagrama secuencia - Crear usuario](DiagramaSecuencia_CrearUsuario.drawio.png)
 ### Login Usuario
 ![Diagrama secuencia - Login usuario]()
 ### Crear Transferencia
