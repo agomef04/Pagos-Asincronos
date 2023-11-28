@@ -18,24 +18,27 @@ export class TransactionViewComponent {
   displayedColumns: string[] = ['id','importe','numOrigen','numDestino','fecha','concepto','estado']; // Lista de columnas a mostrar
   dataSource: MatTableDataSource<any> = new MatTableDataSource; // Fuente de datos de la tabla
 
-  @Input() transactions : Transaction[] = [{id:0,importe:1000,numeroOrigen:0,numeroDestino:0,fecha:new Date(),concepto:"Prueba",estado : "Pendiente"},{id:20,importe:1000,numeroOrigen:0,numeroDestino:0,fecha:new Date(),concepto:"Prueba",estado : "Pendiente"}]
+  @Input() transactions : Transaction[] = []
   constructor(private viewTransactionService: ViewTransactionService,private userService: userOperationsService) {
     this.renderTransactions()
   }
 
   async renderTransactions(){
-    var bankAccount : any
     var userTransactions : any
+    var defTransaction : any
     try {
-      bankAccount = await this.viewTransactionService.getBankAccount(this.userService.id);
-      alert("Hemos traido la cuenta");
-      userTransactions = await this.viewTransactionService.showTransfer(bankAccount);
+      userTransactions = await this.viewTransactionService.showTransfer(this.userService.phoneNumber);
+      console.log("Hemos traido la cuenta");
       // Continúa con la ejecución aquí
     } catch (error) {
       console.error('Error:', error);
       // Maneja el error aquí si es necesario
     }
-      alert("Ya tendriamos las transacciones")
+      console.log("Ya tendriamos las transacciones")
+      for (let transfer of userTransactions) {
+        transfer.accountOrigin = transfer.accountOrigin.user.phoneNumber;
+        transfer.accountDestination = transfer.accountDestination.user.phoneNumber;
+      }
       this.transactions = userTransactions;
       const data = this.transactions
       this.dataSource = new MatTableDataSource(data);
