@@ -25,7 +25,7 @@ export class TransactionViewComponent {
 
   async renderTransactions(){
     var userTransactions : any
-    var defTransaction : any
+    var newDate : number
     try {
       userTransactions = await this.viewTransactionService.showTransfer(this.userService.phoneNumber);
       console.log("Hemos traido la cuenta");
@@ -38,8 +38,11 @@ export class TransactionViewComponent {
       for (let transfer of userTransactions) {
         transfer.accountOrigin = transfer.accountOrigin.user.phoneNumber;
         transfer.accountDestination = transfer.accountDestination.user.phoneNumber;
+        transfer.date = transfer.date;
       }
-      this.transactions = userTransactions;
+      if(userTransactions != null){
+        this.transactions = userTransactions;
+      }
       const data = this.transactions
       this.dataSource = new MatTableDataSource(data);
   }
