@@ -84,6 +84,11 @@ public class TransferValidationService {
     }
 
     public void denegarPago(Transfer t) {
+
+        State rechazadoState = stateRepository.findByNameState("Rechazada");
+        t.setState(rechazadoState);
+        transferRepository.save(t);
+
         messageSender.sendMessage(queueName, "Rechazada", t.getId(), t.getIdConexion());
     }
 

@@ -1,28 +1,52 @@
 # Pagos-Asincronos
-![Esquema aplicacion](Esquema.png)
 
-![Esquema BD](BDPagosAsincronos.jpg)
+## Equema aplicacion
+![Esquema aplicacion](/diagramas/Esquema.png)
 
-Version Java 11
 
-Spring Boot con maven -> 2.7.16
+## Esquema Base de Datos
+![Esquema BD](/diagramas/BDPagosAsincronos.jpg)
 
-Elastic -> 7.17.14
 
-RabbitMQ -> 3.8.2
+## Diagramas de secuencia
 
-Comentario en linea 42 UserService para que no use elastic
+### Crear Usuario
+![Digrama secuencia -  Crear usuario front](/diagramas/front-registrar.png)
+![Diagrama secuencia - Crear usuario back](/diagramas/DiagramaSecuencia_CrearUsuario.drawio.png)
+### Login Usuario
+![Diagrama secuencia - Login usuario](/diagramas/DiagramaLog-In.png)
+### Crear Transferencia
+![Diagrama secuencia - Crear Transferencia]()
+### Listar Transferencias
+![Diagrama secuencia - Listar transferencias]()
 
-DIRECCION SPRINGBOOT
 
-	- Conexion -> /ws-endpoint
+
+## Versiones
+
+* Java -> 11
+
+* Spring Boot con maven -> 2.7.16
+
+* ElasticSearch -> 7.17.14
+
+* RabbitMQ -> 3.8.2
+
+* MySQL -> 8.0.35
+
+* Angular -> 16.2.9
+
+
+## Direcciones backend
+
+* Conexion -> /ws-endpoint
 	
-	- Login -> /users/login
+* Login -> /users/login
 	
-	- Registrar -> ../users/newUser 
+* Registrar -> /users/newUser 
 	
-	- Listar transferencias -> ../listTransfer
+* Listar transferencias -> /listTransfer
 	
-	- Crear transferencia -> /app/createdTransfer , canal /topic/newTransfer
+* Crear transferencia -> /app/createdTransfer , canal /topic/newTransfer/{email}
 
 
