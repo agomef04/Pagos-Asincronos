@@ -18,7 +18,7 @@
 ### Crear Transferencia
 ![Diagrama secuencia - Crear Transferencia]()
 ### Listar Transferencias
-![Diagrama secuencia - Listar transferencias]()
+![Diagrama secuencia - Listar transferencias](/diagramas/DiagramaDeSecuencia_PagosAsíncronos_VerTransferencia.drawio.png)
 
 
 
