@@ -1,19 +1,20 @@
 # Pagos-Asincronos
 
 ## Equema aplicacion
-![Esquema aplicacion](Esquema.png)
+![Esquema aplicacion](/diagramas/Esquema.png)
 
 
 ## Esquema Base de Datos
-![Esquema BD](BDPagosAsincronos.jpg)
+![Esquema BD](/diagramas/BDPagosAsincronos.jpg)
 
 
 ## Diagramas de secuencia
 
 ### Crear Usuario
-![Diagrama secuencia - Crear usuario](DiagramaSecuencia_CrearUsuario.drawio.png)
+![Digrama secuencia -  Crear usuario front](/diagramas/front-registrar.png)
+![Diagrama secuencia - Crear usuario back](/diagramas/DiagramaSecuencia_CrearUsuario.drawio.png)
 ### Login Usuario
-![Diagrama secuencia - Login usuario](login.png)
+![Diagrama secuencia - Login usuario](/diagramas/login.png)
 ### Crear Transferencia
 ![Diagrama secuencia - Crear Transferencia]()
 ### Listar Transferencias
