@@ -14,7 +14,7 @@
 ![Digrama secuencia -  Crear usuario front](/diagramas/front-registrar.png)
 ![Diagrama secuencia - Crear usuario back](/diagramas/DiagramaSecuencia_CrearUsuario.drawio.png)
 ### Login Usuario
-![Diagrama secuencia - Login usuario](/diagramas/login.png)
+![Diagrama secuencia - Login usuario](/diagramas/DiagramaLog-In.png)
 ### Crear Transferencia
 ![Diagrama secuencia - Crear Transferencia]()
 ### Listar Transferencias
