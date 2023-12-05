@@ -1,103 +1,87 @@
-version: '3.9'
+version: '2.2'
 
 services:
-	mysql:
-		image: mysql
-                container_mame: mysql_container
-                volumes:
-      			- db-data:/var/lib/backup/data
-                environment:
-                        MYSQL_ROOT_PASSWORD: root
-                        MYSQL_DATABASE: pagosAsincronosDB
-                        MYSQL_USER: root
-                        MYSQL_PASSWORD: root
-                ports:
-                        - "3306:3306"
-                networks:
-        		- springboot-rabbit
-        		- spring-websocket
-        		- database
-                        
-        springboot-rabbit:
-                build:
-                        context: ./RabbitMQ
-                        dockerfile: Dockerfile
-                depends_on:
-                        - mysql
-                        - rabbitmq
-                ports:
-                        - "8081:8081"
-                environment:
-                        SPRING_RABBITMQ_HOST: rabbitmq
-                        SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/pagosAsincronosDB
-                        SPRING_DATASOURCE_USERNAME: root
-                        SPRING_DATASOURCE_PASSWORD: root
-		networks:
-        		- database
-        		- rabbit
+  mysql:
+    image: mysql
+    container_name: mysql_container
+    volumes:
+      - db-data:/var/lib/backup/data
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pagosAsincronosDB
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3308:3308"
+    networks:
+      - database
 
-        rabbitmq:
-                image: rabbitmq:3.8.2
-                container_name: rabbitmq_container
-                ports:
-                	- "5672:5672"
-       	networks:
-        		- springboot-rabbit
-        		- spring-websocket
-        		- rabbit
-                        
-        elasticsearch:
-        	image: docker.elastic.co/elasticsearch/elasticsearch:7.17.14
-        	container_name: elasticsearch_container
-        	environment:
-        		- discovery.type=single-node
-        	ports:
-        		- "9200:9200"
-        		- "9300:9300"
-        	networks:
-        		- spring-websocket
-        		
-        spring-websocket:
-        	build:
-        		context: ./springBootWebsocket
-        		dockerfile: Dockerfile
-        	ports: 
-        		- "8080:8080"
-        	depends_on:
-        		- mysql
-        		- elastic
-        		- rabbitmq
-        		- angular
-        	networks:
-        		- fronted
-        		- elasticsearch
-        		- rabbit
-        		- database
-        		
-        angular:
-        	image: nginx:16.2.9
-        	container_name: angular_container
-        	volumes:
-        		- ./app/fronted
-        	ports:
-        		- "80:80"
-        	networks:
-        		- fronted
+  springboot-rabbit:
+    build:
+      context: ./RabbitMQ
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+      - rabbitmq
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/pagosAsincronosDB
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - database
+      - rabbit
+
+  rabbitmq:
+    image: rabbitmq:3.8.2
+    container_name: rabbitmq_container
+    ports:
+      - "5673:5673"
+    networks:
+      - rabbit
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.14
+    container_name: elasticsearch_container
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9201:9201"
+      - "9301:9301"
+    networks:
+      - elastic
+
+  spring-websocket:
+    build:
+      context: ./springBootWebsocket/WebSocket
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+      - elasticsearch
+      - rabbitmq
+    networks:
+      - fronted
+      - elastic
+      - rabbit
+      - database
+
+  angular:
+    build:
+      context: ./app/frontend
+      dockerfile: Dockerfile
+    networks:
+      - fronted
+  
+
 volumes:
   db-data:
+
 networks:
-  	fronted: 
-    		driver: bridge  
-	elastic: 
-    		driver: bridge  
-	rabbit: 
-    		driver: bridge   
-	springboot-rabbit: 
-    		driver: bridge  
-	database: 
-    		driver: bridge		
-        		
-        	
-      
-
-
+  fronted: 
+    driver: bridge  
+  elastic: 
+    driver: bridge  
+  rabbit: 
+    driver: bridge   
+  database: 
+    driver: bridge
