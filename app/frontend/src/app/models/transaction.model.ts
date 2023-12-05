@@ -4,6 +4,5 @@ export interface Transaction{
     numeroOrigen : Number,
     numeroDestino : Number,
     fecha : Date,
-    concepto : String,
-    estado : String
+    concepto : String
 }

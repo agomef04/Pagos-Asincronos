@@ -1,13 +1,16 @@
 package com.WebSocket.service;
 
+import com.WebSocket.model.BankAccount;
 import com.WebSocket.model.User;
 import com.WebSocket.model.documentElastic.LoginTrace;
 import com.WebSocket.model.documentElastic.UserElastic;
+import com.WebSocket.repository.BankAccountRepository;
 import com.WebSocket.repository.ElasticsearchLoginRepository;
 import com.WebSocket.repository.ElasticsearchUserRepository;
 import com.WebSocket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.Date;
 import java.util.List;
 

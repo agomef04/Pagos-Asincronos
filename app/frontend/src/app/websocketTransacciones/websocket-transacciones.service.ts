@@ -6,23 +6,27 @@ declare var Stomp : any;
   providedIn: 'root'
 })
 export class websocketTransacciones {
-  private serverUrl = 'http://localhost:8080/ws-endpoint';
+  private serverUrl = 'http://localhost:8080/';
   public stompClient : any;
   public msg = []
 
   constructor() {
   }
 
-  connect(email: String): void {
+  connect(email: string, pass: string): void {
     const ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
 
+    const messageContent = {
+      email: email,
+      password: pass
+    };
+
     this.stompClient.connect({}, (frame : any) => {
-      this.stompClient.subscribe(`/topic/transfer/${email}`, (message : any) => {
-        if (message.body) {
-          alert(message.body);
-        }
-      });
+      console.log(messageContent)
+      if (this.stompClient.status === 'CONNECTED') {
+        this.stompClient.send('/app/topic/message' , {}, messageContent);
+      }
     });
   }
 

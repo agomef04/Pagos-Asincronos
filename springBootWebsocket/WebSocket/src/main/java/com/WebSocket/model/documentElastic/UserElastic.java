@@ -1,29 +1,47 @@
 package com.WebSocket.model.documentElastic;
 
+
+
 import com.WebSocket.model.User;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+
+import java.io.Serializable;
 import java.util.Date;
+
 
 @Document(indexName = "new_user")
 public class UserElastic{
 
-    @Id
-    private String id;
-    private int idUser;
+    private int id;
     private String email;
     private String password;
     private String name;
     private String phoneNumber;
-    private Date date;
 
+    private Date date;
 
     public UserElastic() {
 
     }
 
+    public UserElastic(int idUser, String email, String password, String name, String phoneNumber) {
+        this.id = idUser;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.date = new Date();
+    }
+
+    public UserElastic(String email, String password, String name, String phoneNumber) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.date = new Date();
+    }
+
     public UserElastic(User user) {
-        this.idUser = user.getId();
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.name = user.getName();
@@ -31,28 +49,12 @@ public class UserElastic{
         this.date = new Date();
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setId(int idUser) {
+        this.id = idUser;
     }
 
     public String getEmail() {

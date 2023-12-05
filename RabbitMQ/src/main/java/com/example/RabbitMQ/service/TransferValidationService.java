@@ -38,7 +38,6 @@ public class TransferValidationService {
 
 
     @Scheduled(fixedRate = 30000)
-    // 30000 para 30s
     public void validacionTransferencias() {
 
         State statePendiente = stateRepository.findByNameState("Pendiente");
@@ -64,7 +63,7 @@ public class TransferValidationService {
     }
 
 
-    public void aceptarPago(Transfer t) {
+    public Transfer aceptarPago(Transfer t) {
 
         BankAccount accountOrigin = bankAccountRepository.findById(t.getAccountOrigin().getId());
         BankAccount accountDest = bankAccountRepository.findById(t.getAccountDestination().getId());
@@ -81,15 +80,12 @@ public class TransferValidationService {
         bankAccountRepository.save(accountDest);
 
         messageSender.sendMessage(queueName, "Aceptado", t.getId(), t.getIdConexion());
+        return null;
     }
 
-    public void denegarPago(Transfer t) {
-
-        State rechazadoState = stateRepository.findByNameState("Rechazada");
-        t.setState(rechazadoState);
-        transferRepository.save(t);
-
+    public Transfer denegarPago(Transfer t) {
         messageSender.sendMessage(queueName, "Rechazada", t.getId(), t.getIdConexion());
+        return null;
     }
 
 }

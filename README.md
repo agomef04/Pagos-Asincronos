@@ -1,52 +1,26 @@
 # Pagos-Asincronos
+![Esquema aplicacion](Esquema.png)
 
-## Equema aplicacion
-![Esquema aplicacion](/diagramas/Esquema.png)
+![Esquema BD](BDPagosAsincronos.jpg)
 
+Version Java 11
 
-## Esquema Base de Datos
-![Esquema BD](/diagramas/BDPagosAsincronos.jpg)
+Spring Boot con maven, v 2.7.16
 
-
-## Diagramas de secuencia
-
-### Crear Usuario
-![Digrama secuencia -  Crear usuario front](/diagramas/front-registrar.png)
-![Diagrama secuencia - Crear usuario back](/diagramas/DiagramaSecuencia_CrearUsuario.drawio.png)
-### Login Usuario
-![Diagrama secuencia - Login usuario](/diagramas/DiagramaLog-In.png)
-### Crear Transferencia
-![Diagrama secuencia - Crear Transferencia](/diagramas/Secuencia_CrearTransfer.drawio.png)
-### Listar Transferencias
-![Diagrama secuencia - Listar transferencias](/diagramas/DiagramaDeSecuencia_PagosAsíncronos_VerTransferencia.drawio.png)
+Elastic v
 
 
 
-## Versiones
+DIRECCION SPRINGBOOT
 
-* Java -> 11
-
-* Spring Boot con maven -> 2.7.16
-
-* ElasticSearch -> 7.17.14
-
-* RabbitMQ -> 3.8.2
-
-* MySQL -> 8.0.35
-
-* Angular -> 16.2.9
-
-
-## Direcciones backend
-
-* Conexion -> /ws-endpoint
+	- Conexion -> /ws-endpoint
 	
-* Login -> /users/login
+	- Login -> /users/login
 	
-* Registrar -> /users/newUser 
+	- Registrar -> ../users/newUser 
 	
-* Listar transferencias -> /listTransfer
+	- Listar transferencias -> ../listTransfer
 	
-* Crear transferencia -> /app/createdTransfer , canal /topic/newTransfer/{email}
+	- Crear transferencia -> /app/createdTransfer , canal /topic/newTransfer
 
 

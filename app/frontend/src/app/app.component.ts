@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { websocketTransacciones } from './services/websocketTransacciones/websocket-transacciones.service';
+import { WebsocketService } from './websocket.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,13 @@ import { websocketTransacciones } from './services/websocketTransacciones/websoc
 export class AppComponent {
   title = 'pagina-login';
   input = '';
-  constructor(public websocketService: websocketTransacciones) {}
+  constructor(public websocketService: WebsocketService) {}
 
+  sendMessage() {
+    if(this.input) {
+      this.websocketService.sendMessage(this.input);
+      this.input = '';
+    }
+  }
 }
 

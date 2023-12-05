@@ -51,8 +51,7 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common'
     BrowserAnimationsModule,
     MatToolbarModule,
     MatTableModule,
-    HttpClientModule,
-    MatSnackBarModule
+    HttpClientModule
   ],
   providers: [{provide:LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
