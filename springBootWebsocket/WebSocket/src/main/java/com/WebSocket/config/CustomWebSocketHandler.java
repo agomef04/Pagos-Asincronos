@@ -15,10 +15,13 @@ public class CustomWebSocketHandler {
         sessions.put(sessionId, session);
     }
 
+    public void removeSesion(String sessionId) {
+        sessions.remove(sessionId);
+    }
+
     public String getSessionById(String sessionId) {
         return sessions.get(sessionId);
     }
 
 
-    // Resto de tu implementación para el manejo de sesiones WebSocket
 }

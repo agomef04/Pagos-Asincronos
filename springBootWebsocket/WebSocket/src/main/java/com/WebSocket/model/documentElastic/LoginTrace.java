@@ -8,6 +8,7 @@ import java.util.Date;
 public class LoginTrace{
 
     @Id
+    private String id;
     private int userId;
     private Date loginTime;
 

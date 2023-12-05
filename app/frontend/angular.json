@@ -59,6 +59,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "host": "0.0.0.0", 
+            "port": 4200,
+            "disableHostCheck": true
+          },
           "configurations": {
             "production": {
               "browserTarget": "pagina-login:build:production"
@@ -100,4 +105,5 @@
   "cli": {
     "analytics": "fd66d1e6-7b88-4d83-8a6e-66027500e16a"
   }
+  
 }
