@@ -30,7 +30,6 @@ public class BankAccountService {
 
     public BankAccount create(User user) {
         BankAccount account = new BankAccount(100.00, user);
-        //user.setBankAccount(account);
         return bankAccountRepository.save(account);
     }
 

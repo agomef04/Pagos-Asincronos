@@ -33,9 +33,6 @@ public class TransferService {
         State pendentState = stateRepository.findByNameState("Pendiente");
         Transfer transferNuevo = new Transfer(amount, concept, new Date(), pendentState, accountOrigin , accountDestination, idConexion);
 
-        //bankAccountService.moverDinero(accountOrigin, -amount);
-        //bankAccountService.moverDinero(accountDestination, amount);
-
         TransferTrace newTransfer = new TransferTrace();
         newTransfer.setAmount(amount);
         newTransfer.setConcept(concept);
@@ -68,5 +65,21 @@ public class TransferService {
 
     public List<Transfer> findByAccountOrigin(Transfer transfer) {
         return transferRepository.findByAccountOrigin(transfer.getAccountOrigin());
+    }
+
+
+    public Transfer findByidConexion(String id) {
+        Transfer t =  transferRepository.findByIdConexion(id);
+
+        TransferTrace newTransfer = new TransferTrace();
+        newTransfer.setAmount(t.getAmount());
+        newTransfer.setConcept(t.getConcept());
+        newTransfer.setLoginTime(new Date());
+        newTransfer.setAccountOrigin(t.getAccountOrigin());
+        newTransfer.setAccountDestination(t.getAccountDestination());
+        newTransfer.setState(t.getState());
+        elasticTransferRepository.save(newTransfer);
+
+        return t;
     }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { userOperationsService } from '../services/userOperations/userOperations.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register-page',
@@ -13,7 +14,7 @@ export class RegisterPageComponent {
   userPasswordNR: string = '';
   userPasswordNR2: string = '';
 
-  constructor(private userOperationsService: userOperationsService) {}
+  constructor(private userOperationsService: userOperationsService, private _snackBar: MatSnackBar) {}
 
   register() {
     console.log('Nombre de usuario:', this.userNameNR);
@@ -23,7 +24,10 @@ export class RegisterPageComponent {
     console.log('Confirmar contraseña:', this.userPasswordNR2);
 
     if(this.userPasswordNR !== this.userPasswordNR2){
-      alert("¡Las contraseñas no coinciden!")
+      this._snackBar.open("¡Las contraseñas no coinciden!", "Cerrar");
+      setTimeout(() => {
+        this._snackBar.dismiss();
+      }, 5000);
       return;
     }
   

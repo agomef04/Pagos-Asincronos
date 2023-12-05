@@ -28,7 +28,7 @@ public class UserController {
     @RequestMapping("/newUser")
     public ResponseEntity<?> createUser(@RequestBody User user) {
         // comprobar si existe usuario
-        System.out.println("METODO POST USUARIO -> " + user);
+        //System.out.println("METODO POST USUARIO -> " + user);
         if(userService.userExists(user)) {
             return ResponseEntity.badRequest().body("El usuario ya existe");
         }
@@ -43,7 +43,7 @@ public class UserController {
     @RequestMapping("/login")
     @GetMapping
     public ResponseEntity<?> loginUser(@RequestParam  String email, @RequestParam String password) {
-        System.out.println("Email ->" + email + ", Password -> " + password.toString() );
+        //System.out.println("Email ->" + email + ", Password -> " + password.toString() );
         User userLogin = userService.loginUser(email,password);
         if(userLogin == null) {
             return ResponseEntity.badRequest().body("El usuario no existe");

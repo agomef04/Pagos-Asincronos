@@ -2,6 +2,8 @@ package com.WebSocket.repository;
 
 import com.WebSocket.model.documentElastic.LoginTrace;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ElasticsearchLoginRepository extends ElasticsearchRepository<LoginTrace, Long> {
+@Repository
+public interface ElasticsearchLoginRepository extends ElasticsearchRepository<LoginTrace, String> {
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { WebsocketService } from '../websocket.service';
+import { websocketTransacciones } from './../services/websocketTransacciones/websocket-transacciones.service';
+import { userOperationsService } from './../services/userOperations/userOperations.service';
 
 
 
@@ -10,24 +11,17 @@ import { WebsocketService } from '../websocket.service';
 })
 export class RealizarPagosComponent {
 
-  numberOrigin: string = '';
+  numberOrigin: string = this.userOperationsService.phoneNumber;
   numberDestination: string = '';
   concept: string = '';
   amount: number = 0;
 
-  constructor(private webSocketService: WebsocketService) {}
-
-  sendMessage() {
-    if (this.numberDestination) {
-      this.webSocketService.sendMessage(this.numberDestination);
-      this.numberDestination = '';
-    }
-  }
-
+  constructor(private webSocketService: websocketTransacciones, private userOperationsService: userOperationsService) {}
 
   onSubmit() {
     console.log('Tlf destino: ', this.numberDestination);
     console.log('Amount: ', this.amount);
     console.log('Concept: ', this.concept);
+    this.webSocketService.sendMoney(this.numberDestination, this.amount, this.concept, this.numberOrigin);
   }
 }
