@@ -22,7 +22,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws-endpoint").setAllowedOrigins("http://localhost:4200").withSockJS();;    // configura el punto de conexion webSocket
+        registry.addEndpoint("/ws-endpoint").setAllowedOrigins("http://www.pagosasincronos.com:8090").withSockJS();;    // configura el punto de conexion webSocket
     }
 
     @Override

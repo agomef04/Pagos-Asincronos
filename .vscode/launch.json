@@ -8,6 +8,17 @@
             "mainClass": "com.WebSocket.WebSocketApplication",
             "projectName": "WebSocket",
             "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=59168 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=WebSocket"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-RabbitMqApplication<RabbitMQ>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.RabbitMQ.RabbitMqApplication",
+            "projectName": "RabbitMQ",
+            "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
     ]

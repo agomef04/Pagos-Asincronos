@@ -25,7 +25,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { HeaderComponentComponent } from './header-component/header-component.component';
 import { BloqueadorDirective } from './register-page/bloqueador.directive';
 import { HttpClientModule } from '@angular/common/http';
-import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common'
+import {HashLocationStrategy, LocationStrategy} from '@angular/common'
 
 @NgModule({
   declarations: [

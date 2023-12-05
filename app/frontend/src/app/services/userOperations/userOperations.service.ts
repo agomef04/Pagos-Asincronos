@@ -11,7 +11,7 @@ export class userOperationsService {
 
   login(email: string, password: string){
     console.log(email + " " + password)
-    this.http.get(`http://localhost:8080/users/login?email=${email}&password=${password}`, { observe: 'response' }).subscribe((response: HttpResponse<any>) => {
+    this.http.get(`http://www.pagosasincronos.com:8090/users/login?email=${email}&password=${password}`, { observe: 'response' }).subscribe((response: HttpResponse<any>) => {
       console.log('Respuesta GET:', response);
 
       if(response.status !== 200){
@@ -34,7 +34,7 @@ export class userOperationsService {
         "phoneNumber": userPhoneNR
     }
     
-    this.http.post('http://localhost:8080/users/newUser', userData, { observe: 'response' }).subscribe((response: HttpResponse<any>) => {
+    this.http.post('http://www.pagosasincronos.com:8090/users/newUser', userData, { observe: 'response' }).subscribe((response: HttpResponse<any>) => {
       console.log('Respuesta POST:', response);
       if (response.status === 200) {
         alert("Se ha registrado con exito")
