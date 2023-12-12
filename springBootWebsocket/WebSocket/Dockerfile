@@ -12,4 +12,4 @@ COPY src/main/resources/application.properties /app/application.properties
 EXPOSE 8080
 
 # Comando para ejecutar el sevicio al iniciar contenedor
-CMD ["java", "-jar", "target/WebSocket-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "WebSocket-0.0.1-SNAPSHOT.jar"]

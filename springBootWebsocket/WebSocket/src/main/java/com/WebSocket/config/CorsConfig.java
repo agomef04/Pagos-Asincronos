@@ -14,6 +14,14 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true); // Permite credenciales
         config.addAllowedOrigin("http://localhost:4200"); // Origen permitido
+        config.addAllowedOrigin("http://172.20.10.2:4200");
+        config.addAllowedOrigin("http://172.20.10.4:4200");
+
+        // Permitir para WebSocket
+        config.addAllowedOrigin("ws://localhost:4200");
+        config.addAllowedOrigin("ws://172.20.10.2:4200");
+        config.addAllowedOrigin("ws://172.20.10.4:4200");
+
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);

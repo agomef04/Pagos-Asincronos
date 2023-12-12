@@ -40,7 +40,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws-endpoint").setAllowedOrigins("http://localhost:4200").withSockJS();    // configura el punto de conexion webSocket
+        registry.addEndpoint("/ws-endpoint").setAllowedOrigins("http://localhost:4200", "http://172.20.10.2:4200", "http://172.20.10.4:4200", "ws://localhost:4200", "ws://172.20.10.2:4200", "ws://172.20.10.4:4200").withSockJS();    // configura el punto de conexion webSocket
+        //registry.addEndpoint("/ws-endpoint").setAllowedOrigins("*").withSockJS();    // configura el punto de conexion webSocket
+
     }
 
     @Override
@@ -54,8 +56,16 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                     // Guardar la sesión WebSocket con su identificador al establecer la conexión
                     String sessionId = accessor.getSessionId();
                     SimpMessagingTemplate simpMessagingTemplate = new SimpMessagingTemplate(channel);
-                    System.out.println("\t(" + sessionId + "," + accessor.getDestination() + ")");
+                    System.out.println("\t Sesion subscrita(" + sessionId + "," + accessor.getDestination() + ")");
                     customWebSocketHandler.addSession(sessionId, accessor.getDestination());
+                }
+
+                if (StompCommand.DISCONNECT.equals(accessor.getCommand())) {
+                    // Guardar la sesión WebSocket con su identificador al establecer la conexión
+                    String sessionId = accessor.getSessionId();
+                    SimpMessagingTemplate simpMessagingTemplate = new SimpMessagingTemplate(channel);
+                    System.out.println("\t Sesion cerrada (" + sessionId + "," + accessor.getDestination() + ")");
+                    customWebSocketHandler.removeSesion(sessionId);
                 }
                 return message;
             }
