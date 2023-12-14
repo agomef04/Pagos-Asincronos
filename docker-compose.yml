@@ -11,7 +11,7 @@ services:
       MYSQL_DATABASE: pagosAsincronosDB
       MYSQL_PASSWORD: root
     ports:
-      - "3307:3307"
+      - "3306:3306"
     networks:
       - database
 
@@ -23,23 +23,22 @@ services:
     networks:
       - rabbit
 
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.14
-    container_name: elasticsearch_container
-    environment:
-      - discovery.type=single-node
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    networks:
-      - elastic
-
   angular:
     build:
       context: ./app/frontend
       dockerfile: Dockerfile
     networks:
-      - fronted
+      - frontend
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.14
+    container_name: elasticsearch_container
+    environment:
+      - discovery.type=single-node
+    mem_limit: 1g 
+    ports:
+      - "9200:9200"
+      - "9300:9300"
 
   springboot-rabbit:
     build:
@@ -50,13 +49,13 @@ services:
       - rabbitmq
     environment:
       SPRING_RABBITMQ_HOST: rabbitmq
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/pagosAsincronosDB
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_container:3306/pagosAsincronosDB
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
     networks:
       - database
       - rabbit
-      
+  
   spring-websocket:
     build:
       context: ./springBootWebsocket/WebSocket
@@ -66,25 +65,21 @@ services:
       - elasticsearch
       - rabbitmq
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/pagosAsincronosDB
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_container:3306/pagosAsincronosDB
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES: localhost:9200
     networks:
-      - fronted
+      - frontend
       - elastic
       - rabbit
       - database
-  
-
-  
-  
-  
 
 volumes:
   db-data:
 
 networks:
-  fronted: 
+  frontend: 
     driver: bridge  
   elastic: 
     driver: bridge  
