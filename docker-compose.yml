@@ -39,6 +39,8 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
+    networks:
+      - elastic
 
   springboot-rabbit:
     build:
@@ -68,7 +70,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_container:3306/pagosAsincronosDB
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
-      SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES: localhost:9200
+      SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES: elasticsearch_container:9200
     networks:
       - frontend
       - elastic

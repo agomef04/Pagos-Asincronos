@@ -14,12 +14,12 @@ import java.util.ArrayList;
 @Service
 public class BankAccountService {
 
-    @Autowired
+
     private BankAccountRepository bankAccountRepository;
-    @Autowired
+
     private UserService userService;
 
-    @Autowired
+
     private ElasticBankAccountRepository elasticBankAccountRepository;
 
     // comprobar que la cuenta destino existe -> account

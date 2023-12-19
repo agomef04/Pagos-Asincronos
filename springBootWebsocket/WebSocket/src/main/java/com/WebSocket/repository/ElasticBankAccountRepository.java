@@ -1,6 +1,7 @@
 package com.WebSocket.repository;
 
 import com.WebSocket.model.BankAccount;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -18,14 +18,15 @@ import java.util.List;
 @Service
 public class TransferService {
 
-    @Autowired
+
     private TransferRepository transferRepository;
-    @Autowired
+
+
     private StateRepository stateRepository;
-    @Autowired
+
     private BankAccountService bankAccountService;
 
-    @Autowired
+
     private ElasticTransferRepository elasticTransferRepository;
 
 

@@ -2,6 +2,7 @@ package com.WebSocket.service;
 
 import com.WebSocket.model.State;
 import com.WebSocket.repository.StateRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -9,7 +10,9 @@ import javax.annotation.PostConstruct;
 @Service
 public class StateInitializationService {
 
+
     private final StateRepository stateRepository;
+
 
     public StateInitializationService(StateRepository stateRepository) {
         this.stateRepository = stateRepository;
